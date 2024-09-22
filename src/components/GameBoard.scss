@@ -1,0 +1,64 @@
+@import "../utils";
+@include font("Roboto Mono", "../../assets/RobotMono");
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 50px);
+  grid-template-rows: repeat(8, 50px);
+
+  .square {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+    height: 50px;
+
+    &-light {
+      @extend .square;
+      background-color: bisque;
+    }
+
+    &-dark {
+      @extend .square;
+      background-color: gray;
+    }
+    .coordinate {
+      font-family: "RobotoMono", monospace;
+      &-row {
+        @extend .coordinate;
+        margin-left: 3px;
+
+        justify-self: flex-start;
+        align-self: flex-start;
+
+        font-size: 10px;
+
+        &-light {
+          @extend .coordinate-row;
+          color: gray;
+        }
+        &-dark {
+          @extend .coordinate-row;
+          color: bisque;
+        }
+      }
+      &-col {
+        @extend .coordinate;
+        margin-right: 3px;
+
+        justify-self: flex-end;
+        align-self: flex-end;
+
+        font-size: 12px;
+
+        &-light {
+          @extend .coordinate-col;
+          color: gray;
+        }
+        &-dark {
+          @extend .coordinate-col;
+          color: bisque;
+        }
+      }
+    }
+  }
+}
