@@ -4,23 +4,23 @@ import "./GameBoard.scss";
 
 import Piece from "./Piece";
 
-const indexColes = ["a", "b", "c", "d", "e", "f", "g", "h"];
+const columnIndexes = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const chess = new Chess();
 
 export default function GameBoard() {
-  const [chessBoard, updateChessboard] = useState(chess.board());
+  const [chessBoard, setChessboard] = useState(chess.board());
 
   return (
     <>
       <div className='board'>
-        {chessBoard.map((boardCol, indexCol) => (
-          <div key={indexCol}>
-            {boardCol.map((square, indexRow) => (
+        {chessBoard.map((boardRow, indexRow) => (
+          <div key={indexRow} className='row-wrapper'>
+            {boardRow.map((square, indexCol) => (
               <div
-                key={indexRow}
+                key={`${columnIndexes[indexCol]}${indexRow}`}
                 className={
-                  (indexRow % 2 == 0 && indexCol % 2 == 0) ||
-                  (indexRow % 2 != 0 && indexCol % 2 !== 0)
+                  (indexCol % 2 == 0 && indexRow % 2 == 0) ||
+                  (indexCol % 2 != 0 && indexRow % 2 !== 0)
                     ? "square-light"
                     : "square-dark"
                 }
@@ -36,7 +36,9 @@ export default function GameBoard() {
                     {(indexRow - 8) * -1}
                   </span>
                 ) : null}
-                <Piece data={square} />
+                {square != null ? (
+                  <Piece data={square} chessboard={chessBoard} chess={chess} />
+                ) : null}
                 {indexRow == 7 ? (
                   <span
                     className={
@@ -45,7 +47,7 @@ export default function GameBoard() {
                         : "coordinate-col-light"
                     }
                   >
-                    {indexColes[indexCol]}
+                    {columnIndexes[indexCol]}
                   </span>
                 ) : null}
               </div>
