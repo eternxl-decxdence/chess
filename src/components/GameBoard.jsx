@@ -12,17 +12,21 @@ export default function GameBoard() {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
   const [possibleMoves, setPossibleMoves] = useState();
-  
+
   const handleSelection = (position) => {
-    
+    console.log(activeSquare);
     setActiveSquare(position);
-    setPossibleMoves(chess.moves({square: position, verbose: true}).map(({to}) => to));
-  }
+    setPossibleMoves(
+      chess.moves({ square: position, verbose: true }).map(({ to }) => to)
+    );
+    console.log(possibleMoves);
+  };
+
   const handleMove = (destination) => {
-    chess.move({from: activeSquare, to: destination});
+    chess.move({ from: activeSquare, to: destination });
     setPossibleMoves([]);
     setChessboard(chess.board());
-  }
+  };
 
   return (
     <>
@@ -35,11 +39,13 @@ export default function GameBoard() {
                 squareData={square}
                 row={indexRow}
                 column={indexCol}
-                chess={chess}
-                
                 onPieceSelect={handleSelection}
-                isMovable={square != null && square.square == activeSquare ? true : false }
-                isPossibleMove={possibleMoves != null && possibleMoves.includes(`${columnIndexes[indexCol]}${(indexRow - 8) * -1}`)}
+                isPossibleMove={
+                  possibleMoves != null &&
+                  possibleMoves.includes(
+                    `${columnIndexes[indexCol]}${(indexRow - 8) * -1}`
+                  )
+                }
                 onPieceMove={handleMove}
               >
                 {square != null ? <Piece data={square} /> : null}
