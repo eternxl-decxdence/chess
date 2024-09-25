@@ -1,8 +1,9 @@
 import "./Piece.scss";
+import { Chess } from "chess.js";
 import PieceIcon from "../assets/symbol-defs.svg";
 import { returnPieceIconName } from "../utils";
 
-export default function Piece({ data, chess, chessboard }) {
+export default function Piece({ data }) {
   return (
     <>
       <span className={"piece"}>

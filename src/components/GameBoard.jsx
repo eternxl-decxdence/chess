@@ -1,56 +1,37 @@
 import { useState } from "react";
 import { Chess } from "chess.js";
+import { columnIndexes } from "../utils";
 import "./GameBoard.scss";
 
 import Piece from "./Piece";
+import Square from "./Square";
 
-const columnIndexes = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const chess = new Chess();
 
 export default function GameBoard() {
-  const [chessBoard, setChessboard] = useState(chess.board());
-
+  const [chessboard, setChessboard] = useState(chess.board());
+  const [activeSquare, setActiveSquare] = useState();
+  function showPossibleMoves(position) {
+    return chess.moves({ square: position });
+  }
+  function movePiece(from, to) {}
   return (
     <>
       <div className='board'>
-        {chessBoard.map((boardRow, indexRow) => (
+        {chessboard.map((boardRow, indexRow) => (
           <div key={indexRow} className='row-wrapper'>
             {boardRow.map((square, indexCol) => (
-              <div
+              <Square
                 key={`${columnIndexes[indexCol]}${indexRow}`}
-                className={
-                  (indexCol % 2 == 0 && indexRow % 2 == 0) ||
-                  (indexCol % 2 != 0 && indexRow % 2 !== 0)
-                    ? "square-light"
-                    : "square-dark"
-                }
+                squareData={square}
+                row={indexRow}
+                column={indexCol}
+                chess={chess}
+                onPieceSelect={showPossibleMoves}
+                onPieceMove={movePiece}
               >
-                {indexCol == 0 ? (
-                  <span
-                    className={
-                      indexRow % 2 == 0
-                        ? "coordinate-row-light"
-                        : "coordinate-row-dark"
-                    }
-                  >
-                    {(indexRow - 8) * -1}
-                  </span>
-                ) : null}
-                {square != null ? (
-                  <Piece data={square} chessboard={chessBoard} chess={chess} />
-                ) : null}
-                {indexRow == 7 ? (
-                  <span
-                    className={
-                      indexCol % 2 == 0
-                        ? "coordinate-col-dark"
-                        : "coordinate-col-light"
-                    }
-                  >
-                    {columnIndexes[indexCol]}
-                  </span>
-                ) : null}
-              </div>
+                {square != null ? <Piece data={square} /> : null}
+              </Square>
             ))}
           </div>
         ))}

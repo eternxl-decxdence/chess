@@ -20,3 +20,4 @@ export function returnPieceIconName(pieceObj) {
   }
   return iconId;
 }
+export const columnIndexes = ["a", "b", "c", "d", "e", "f", "g", "h"];

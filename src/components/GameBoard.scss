@@ -1,5 +1,3 @@
-@import "../utils";
-@include font("Roboto Mono", "../../assets/RobotMono");
 .board {
   display: flex;
   flex-direction: column;
@@ -7,61 +5,5 @@
   .row-wrapper {
     display: flex;
     flex-direction: row;
-  }
-  .square {
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-
-    &-light {
-      @extend .square;
-      background-color: bisque;
-    }
-
-    &-dark {
-      @extend .square;
-      background-color: gray;
-    }
-    .coordinate {
-      font-family: "RobotoMono", monospace;
-      position: absolute;
-      line-height: 12px;
-      &-row {
-        @extend .coordinate;
-        top: 3px;
-        left: 3px;
-
-        font-size: 10px;
-
-        &-light {
-          @extend .coordinate-row;
-          color: gray;
-        }
-        &-dark {
-          @extend .coordinate-row;
-          color: bisque;
-        }
-      }
-      &-col {
-        @extend .coordinate;
-
-        bottom: 3px;
-        right: 3px;
-        font-size: 12px;
-
-        &-light {
-          @extend .coordinate-col;
-          color: gray;
-        }
-        &-dark {
-          @extend .coordinate-col;
-          color: bisque;
-        }
-      }
-    }
   }
 }
