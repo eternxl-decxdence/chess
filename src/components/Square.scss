@@ -53,4 +53,17 @@
       }
     }
   }
+  
+  .possible-move {
+    background-color: black;
+    opacity: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    transition: 300ms;
+    &:hover {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }

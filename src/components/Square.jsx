@@ -8,7 +8,10 @@ export default function Square({
   row,
   column,
   chess,
-  showPossibleMoves
+  onPieceSelect,
+  isMovable,
+  isPossibleMove,
+  onPieceMove
 }) {
   return (
     <div
@@ -17,8 +20,8 @@ export default function Square({
         (column % 2 == 0 && row % 2 == 0) || (column % 2 != 0 && row % 2 !== 0)
           ? "square-light"
           : "square-dark"
-      }`}
-      onClick={() => showPossibleMoves(squareData.Square)}
+      }`} 
+      onClick={squareData != null ? () => onPieceSelect(squareData.square) : null}
     >
       {column == 0 ? (
         <span
@@ -29,6 +32,7 @@ export default function Square({
           {(row - 8) * -1}
         </span>
       ) : null}
+      {isPossibleMove ? <div className={`possible-move ${isPossibleMove? 'movable' : null}`} onClick={isPossibleMove ? () => onPieceMove(`${columnIndexes[column]}${(row-8)* -1}`) : null}></div> : null}
       {children}
       {row == 7 ? (
         <span
