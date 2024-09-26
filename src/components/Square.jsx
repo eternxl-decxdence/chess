@@ -1,6 +1,5 @@
 import "./Square.scss";
-import { columnIndexes } from "../utils";
-import { Chess } from "chess.js";
+import { columnIndexes, defaultSquareNotation } from "../utils";
 
 export default function Square({
   squareData,
@@ -9,8 +8,8 @@ export default function Square({
   column,
   chess,
   onPieceSelect,
-  isMovable,
   isPossibleMove,
+  isLastMove,
   onPieceMove
 }) {
   return (
@@ -20,9 +19,18 @@ export default function Square({
         (column % 2 == 0 && row % 2 == 0) || (column % 2 != 0 && row % 2 !== 0)
           ? "square-light"
           : "square-dark"
+      } ${isLastMove ? "last-move" : ""} ${
+        isPossibleMove && squareData != null ? "attack" : ""
+      }`}
+      onClick={
+        squareData != null && squareData.color === chess.turn()
+          ? () => onPieceSelect(squareData.square)
+          : squareData != null &&
+            squareData.color !== chess.turn() &&
+            isPossibleMove
+          ? () => onPieceMove(defaultSquareNotation(column, row), squareData)
+          : null
       }
-      ${isPossibleMove && children != null ? 'attack' : ''}`} 
-      onClick={squareData != null ? () => onPieceSelect(squareData.square) : null}
     >
       {column == 0 ? (
         <span
@@ -33,7 +41,20 @@ export default function Square({
           {(row - 8) * -1}
         </span>
       ) : null}
-      {isPossibleMove ? <div className={`possible-move${children != null ? '-attack' : '-empty'}`} onClick={isPossibleMove ? () => onPieceMove(`${columnIndexes[column]}${(row-8)* -1}`) : null}></div> : null}
+
+      {isPossibleMove ? (
+        <div
+          className={`possible-move${
+            squareData != null ? "-attack" : "-empty"
+          }`}
+          onClick={
+            isPossibleMove
+              ? () =>
+                  onPieceMove(defaultSquareNotation(column, row), squareData)
+              : null
+          }
+        ></div>
+      ) : null}
       {children}
       {row == 7 ? (
         <span

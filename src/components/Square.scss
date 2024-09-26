@@ -6,11 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  .attack {
-    background-color: red;
-  }
+  width: 100px;
+  height: 100px;
   &-light {
     background-color: bisque;
   }
@@ -21,13 +18,13 @@
   .coordinate {
     font-family: "RobotoMono", monospace;
     position: absolute;
-    line-height: 12px;
+    line-height: 24px;
+    font-size: 20px;
+
     &-row {
       @extend .coordinate;
-      top: 3px;
-      left: 3px;
-
-      font-size: 10px;
+      top: 6px;
+      left: 6px;
 
       &-light {
         @extend .coordinate-row;
@@ -41,9 +38,8 @@
     &-col {
       @extend .coordinate;
 
-      bottom: 3px;
-      right: 3px;
-      font-size: 12px;
+      bottom: 6px;
+      right: 6px;
 
       &-light {
         @extend .coordinate-col;
@@ -55,26 +51,35 @@
       }
     }
   }
-  
+
   .possible-move {
     background-color: black;
     opacity: 50%;
-    
+
     border-radius: 100%;
     transition: 300ms;
 
     &:hover {
-      width: 30px;
-      height: 30px;
+      width: 60px;
+      height: 60px;
     }
 
     &-attack {
+      @extend .possible-move;
       width: 0;
       height: 0;
     }
     &-empty {
-    width: 20px;
-    height: 20px;
+      @extend .possible-move;
+      width: 40px;
+      height: 40px;
+    }
   }
-  
+}
+
+.last-move {
+  box-shadow: inset 0px 0px 49px -11px rgba(132, 231, 85, 1);
+}
+.attack {
+  box-shadow: inset 0px 0px 49px -11px rgba(231, 85, 85, 1);
 }

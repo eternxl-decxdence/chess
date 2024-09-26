@@ -20,4 +20,7 @@ export function returnPieceIconName(pieceObj) {
   }
   return iconId;
 }
+export function defaultSquareNotation(column, row) {
+  return `${columnIndexes[column]}${(row - 8) * -1}`;
+}
 export const columnIndexes = ["a", "b", "c", "d", "e", "f", "g", "h"];
