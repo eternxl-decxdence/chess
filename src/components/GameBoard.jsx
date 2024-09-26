@@ -23,6 +23,10 @@ export default function GameBoard() {
     chess.move({ from: activeSquare, to: destination });
     setPossibleMoves([]);
     setChessboard(chess.board());
+    chess.isGameOver();
+    chess.isThreefoldRepetition();
+    chess.isStalemate();
+    chess.isInsufficientMaterial();
   };
 
   return (

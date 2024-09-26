@@ -1,10 +1,18 @@
 .piece {
   display: flex;
   color: black;
+  cursor: grab;
 
   .icon {
     justify-self: center;
     width: 88px;
     height: 88px;
+    transition: 150ms;
+  }
+  &:hover {
+    .icon {
+      width: 96px;
+      height: 96px;
+    }
   }
 }

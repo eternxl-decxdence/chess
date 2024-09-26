@@ -12,6 +12,17 @@ export default function Square({
   isLastMove,
   onPieceMove
 }) {
+  function returnCornerClass(row, col) {
+    if (row == 0 && col == 0) {
+      return "top-left";
+    } else if (row == 0 && col == 7) {
+      return "top-right";
+    } else if (row == 7 && col == 0) {
+      return "bottom-left";
+    } else if (row == 7 && col == 7) {
+      return "bottom-right";
+    }
+  }
   return (
     <div
       key={`${columnIndexes[column]}${row}`}
@@ -19,8 +30,15 @@ export default function Square({
         (column % 2 == 0 && row % 2 == 0) || (column % 2 != 0 && row % 2 !== 0)
           ? "square-light"
           : "square-dark"
-      } ${isLastMove ? "last-move" : ""} ${
-        isPossibleMove && squareData != null ? "attack" : ""
+      }${isLastMove ? " last-move" : ""}${
+        isPossibleMove && squareData != null ? " attack" : ""
+      }${
+        (row == 0 && column == 0) ||
+        (row == 0 && column == 7) ||
+        (row == 7 && column == 0) ||
+        (row == 7 && column == 7)
+          ? " corner-" + returnCornerClass(row, column)
+          : ""
       }`}
       onClick={
         squareData != null && squareData.color === chess.turn()

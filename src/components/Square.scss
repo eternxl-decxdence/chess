@@ -20,6 +20,7 @@
     position: absolute;
     line-height: 24px;
     font-size: 20px;
+    user-select: none;
 
     &-row {
       @extend .coordinate;
@@ -82,4 +83,17 @@
 }
 .attack {
   box-shadow: inset 0px 0px 49px -11px rgba(231, 85, 85, 1);
+}
+
+.corner-top-left {
+  border-top-left-radius: 5px;
+}
+.corner-top-right {
+  border-top-right-radius: 5px;
+}
+.corner-bottom-left {
+  border-bottom-left-radius: 5px;
+}
+.corner-bottom-right {
+  border-bottom-right-radius: 5px;
 }

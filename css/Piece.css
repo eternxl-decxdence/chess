@@ -1,1 +1,1 @@
-.piece{display:flex;color:#000}.piece .icon{justify-self:center;width:88px;height:88px}/*# sourceMappingURL=Piece.css.map */
+.piece{display:flex;color:#000;cursor:grab}.piece .icon{justify-self:center;width:88px;height:88px;transition:150ms}.piece:hover .icon{width:96px;height:96px}/*# sourceMappingURL=Piece.css.map */
