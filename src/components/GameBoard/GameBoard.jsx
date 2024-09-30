@@ -1,33 +1,51 @@
 import { useState, version } from "react";
 import { Chess } from "chess.js";
-import { defaultSquareNotation } from "../utils";
+import {
+  deconstructDefaultSquareNotation,
+  defaultSquareNotation
+} from "../../utils";
+
 import "./GameBoard.scss";
 
-import Piece from "./Piece";
-import Square from "./Square";
-
-const chess = new Chess();
+import Piece from "../Piece/Piece";
+import Square from "../Square/Square";
+import PromotionDialog from "../PromotionDialog/PromotionDialog";
+//  promotion testing
+const chess = new Chess("8/PPPPPPPP/8/5k1P/p1K5/8/pppppppp/8 w - - 0 1");
+// const chess = new Chess();
 
 export default function GameBoard() {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
   const [possibleMoves, setPossibleMoves] = useState();
+  const [promotionDialogOpened, setPromotionDialogOpened] = useState(false);
 
-  const handleSelection = (position) => {
-    setActiveSquare(position);
+  function handleSelection(pieceObj) {
+    setActiveSquare(pieceObj);
+    console.log(activeSquare);
     setPossibleMoves(
-      chess.moves({ square: position, verbose: true }).map(({ to }) => to)
+      chess
+        .moves({ square: pieceObj.square, verbose: true })
+        .map(({ to }) => to)
     );
-  };
-  const handleMove = (destination, square) => {
-    chess.move({ from: activeSquare, to: destination });
+  }
+
+  function handleMove(destination, promotionFigure) {
+    chess.move({
+      from: activeSquare.square,
+      to: destination,
+      promotion: promotionFigure
+    });
     setPossibleMoves([]);
     setChessboard(chess.board());
-    chess.isGameOver();
-    chess.isThreefoldRepetition();
-    chess.isStalemate();
-    chess.isInsufficientMaterial();
-  };
+  }
+  function handlePromotion() {
+    setPromotionDialogOpened(true);
+  }
+  function handleDialogClosure() {
+    console.log("closed");
+    setPromotionDialogOpened(false);
+  }
 
   return (
     <div className='board-wrapper'>
@@ -39,6 +57,7 @@ export default function GameBoard() {
           <div key={indexRow} className='row-wrapper'>
             {boardRow.map((square, indexCol) => (
               <Square
+                activeSquareData={activeSquare}
                 key={defaultSquareNotation(indexCol, indexRow)}
                 squareData={square}
                 row={indexRow}
@@ -59,12 +78,22 @@ export default function GameBoard() {
                 }
                 onPieceSelect={handleSelection}
                 onPieceMove={handleMove}
+                onPromotion={handlePromotion}
               >
                 {square != null ? <Piece data={square} /> : null}
               </Square>
             ))}
           </div>
         ))}
+        {promotionDialogOpened ? (
+          <PromotionDialog
+            sideToMove={chess.turn()}
+            column={deconstructDefaultSquareNotation(activeSquare)[0]}
+            row={deconstructDefaultSquareNotation(activeSquare)[1]}
+            onPromotionSelect={handleMove}
+            onClose={handleDialogClosure}
+          />
+        ) : null}
       </div>
     </div>
   );

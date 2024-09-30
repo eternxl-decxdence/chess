@@ -8,6 +8,8 @@
   align-items: center;
   width: 100px;
   height: 100px;
+  overflow: visible;
+  z-index: 0;
   &-light {
     background-color: bisque;
   }
@@ -54,35 +56,49 @@
   }
 
   .possible-move {
-    background-color: black;
+    position: absolute;
     opacity: 50%;
 
     border-radius: 100%;
     transition: 300ms;
-
-    &:hover {
-      width: 60px;
-      height: 60px;
-    }
+    cursor: pointer;
 
     &-attack {
       @extend .possible-move;
-      width: 0;
-      height: 0;
+
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 10px solid black;
+
+      &:hover {
+        border: 50px solid black;
+      }
     }
     &-empty {
       @extend .possible-move;
+
+      background-color: black;
+
       width: 40px;
       height: 40px;
+
+      &:hover {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 }
 
 .last-move {
-  box-shadow: inset 0px 0px 49px -11px rgba(132, 231, 85, 1);
+  box-shadow: inset 0px 0px 49px -11px rgba(209, 178, 3, 0.678);
 }
 .attack {
-  box-shadow: inset 0px 0px 49px -11px rgba(231, 85, 85, 1);
+  box-shadow: inset 0px 0px 49px -11px rgba(250, 97, 97, 0.658);
+}
+.checked {
+  box-shadow: inset 0px 0px 74px -24px rgba(253, 0, 46, 1);
 }
 
 .corner-top-left {
