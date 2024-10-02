@@ -47,6 +47,3 @@ export function returnCornerClass(row, col) {
     return "bottom-right";
   }
 }
-export function deconstructDefaultSquareNotation(notation) {
-  return [columnIndexes.indexOf(notation[0]), notation.charAt(1)];
-}

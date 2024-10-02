@@ -1,7 +1,6 @@
 import { useState, version } from "react";
 import { Chess } from "chess.js";
 import {
-  deconstructDefaultSquareNotation,
   defaultSquareNotation
 } from "../../utils";
 
@@ -10,9 +9,11 @@ import "./GameBoard.scss";
 import Piece from "../Piece/Piece";
 import Square from "../Square/Square";
 import PromotionDialog from "../PromotionDialog/PromotionDialog";
-//  promotion testing
-const chess = new Chess("8/PPPPPPPP/8/5k1P/p1K5/8/pppppppp/8 w - - 0 1");
-// const chess = new Chess();
+
+//const chess = new Chess();
+//gameOver testing 
+const chess = new Chess("rnbqkbnr/pppppppp/8/8/2B5/5Q2/PPPPPPPP/RNB1K1NR w KQ - 0 1");  
+
 
 export default function GameBoard() {
   const [chessboard, setChessboard] = useState(chess.board());
@@ -23,7 +24,6 @@ export default function GameBoard() {
 
   function handleSelection(pieceObj) {
     setActiveSquare(pieceObj);
-    console.log(activeSquare);
     setPossibleMoves(
       chess
         .moves({ square: pieceObj.square, verbose: true })
@@ -32,8 +32,6 @@ export default function GameBoard() {
   }
 
   function handleMove(destination, promotionFigure) {
-    console.log(activeSquare);
-    console.log(destination);
     chess.move({
       from: activeSquare.square,
       to: destination,

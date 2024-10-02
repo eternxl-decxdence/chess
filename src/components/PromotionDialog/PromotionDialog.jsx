@@ -13,7 +13,6 @@ export default function PromotionDialog({
 }) {
   const figures = ["q", "b", "r", "n"];
   function handlePieceSelect(figure) {
-    console.log(`${crossIcon }`)
     onPromotionSelect(defaultSquareNotation(column, row), figure);
     onClose();
   }
