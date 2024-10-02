@@ -1,7 +1,9 @@
 import "./PromotionDialog.scss";
-import { defaultSquareNotation, returnPieceIconName } from "../../utils";
-import PieceIcon from "../../assets/symbol-defs.svg";
+import crossIcon from "../../assets/cross.svg";
+import { defaultSquareNotation } from "../../utils";
+import { WHITE } from "chess.js";
 
+import Piece from "../Piece/Piece";
 export default function PromotionDialog({
   sideToMove,
   row,
@@ -11,28 +13,28 @@ export default function PromotionDialog({
 }) {
   const figures = ["q", "b", "r", "n"];
   function handlePieceSelect(figure) {
+    console.log(`${crossIcon }`)
     onPromotionSelect(defaultSquareNotation(column, row), figure);
     onClose();
   }
   return (
     <div className='promotion-dialog-overlay' onClick={onClose}>
-      <div className='promotion-dialog'>
+      <div className={`promotion-dialog ${sideToMove == WHITE ? 'side-white' : 'side-black' }`} 
+      style={{"--column-number": column}}>
         {figures.map((figure) => (
           <div
             key={figure}
             className='piece-click'
             onClick={() => handlePieceSelect(figure)}
           >
-            <svg className='icon'>
-              <use
-                href={`${PieceIcon}#${returnPieceIconName({
-                  color: sideToMove,
-                  type: figure
-                })}`}
-              ></use>
-            </svg>
+            <Piece data={{type: figure, color: sideToMove}}/>
           </div>
         ))}
+        <div className="close-dialog" onClick={onClose}>
+          <svg className='cross-icon'>
+            <use href={`${crossIcon}#icon-cross`}></use>
+          </svg>
+        </div>
       </div>
     </div>
   );

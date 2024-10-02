@@ -48,5 +48,5 @@ export function returnCornerClass(row, col) {
   }
 }
 export function deconstructDefaultSquareNotation(notation) {
-  return [columnIndexes.indexOf(notation[0]), notation[1]];
+  return [columnIndexes.indexOf(notation[0]), notation.charAt(1)];
 }

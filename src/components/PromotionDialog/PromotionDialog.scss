@@ -1,27 +1,62 @@
 .promotion-dialog {
-  --x: 300;
-  --y: 400;
+  --column-number: 0;
 
   position: absolute;
 
   display: flex;
-  flex-direction: column;
+  
   justify-content: space-between;
   align-items: center;
-
-  padding: 10px;
-
-  gap: 10px;
-  height: 350px;
-
-  border-radius: 10px;
+  
   background-color: white;
 
-  top: 0;
-  left: 0;
+  
+  left: calc(var(--column-number)*100px);
 
   overflow: visible;
   z-index: 1000;
+
+  box-shadow: 1px 7px 34px -11px rgba(27, 27, 27, 1);
+  transition: 150ms;
+
+  .piece-click {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+  }
+
+  .close-dialog { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 50px;
+    width: 100px;
+    background-color: lightgray;
+    .cross-icon {
+      width: 26px;
+      height: 26px;
+      fill: gray;
+
+      transition: 150ms;
+      &:hover {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    
+  }
+}
+.side-white {
+  flex-direction: column;
+  top: 0;
+}
+.side-black { 
+  flex-direction: column-reverse;
+  top: 350px;
 }
 .promotion-dialog-overlay {
   position: absolute;
@@ -31,25 +66,4 @@
   left: 0;
   overflow: visible;
 }
-.piece-click {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  height: 80px;
-  width: 80px;
-  border-radius: 8px;
-  border: 1px solid black;
 
-  .icon {
-    width: 72px;
-    height: 72px;
-    transition: 150ms;
-  }
-  &:hover {
-    .icon {
-      width: 96px;
-      height: 96px;
-    }
-  }
-}

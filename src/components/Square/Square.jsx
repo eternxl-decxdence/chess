@@ -4,9 +4,7 @@ import {
   defaultSquareNotation,
   returnCornerClass
 } from "../../utils";
-import { useState } from "react";
 
-import PromotionDialog from "../PromotionDialog/PromotionDialog";
 import { WHITE, BLACK, PAWN, KING } from "chess.js";
 
 export default function Square({

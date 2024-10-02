@@ -17,7 +17,8 @@ const chess = new Chess("8/PPPPPPPP/8/5k1P/p1K5/8/pppppppp/8 w - - 0 1");
 export default function GameBoard() {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
-  const [possibleMoves, setPossibleMoves] = useState();
+  const [possibleMoves, setPossibleMoves] = useState(null);
+  const [promotionDestination, setPromotionDestination] = useState({row: null, column: null});
   const [promotionDialogOpened, setPromotionDialogOpened] = useState(false);
 
   function handleSelection(pieceObj) {
@@ -31,6 +32,8 @@ export default function GameBoard() {
   }
 
   function handleMove(destination, promotionFigure) {
+    console.log(activeSquare);
+    console.log(destination);
     chess.move({
       from: activeSquare.square,
       to: destination,
@@ -39,11 +42,11 @@ export default function GameBoard() {
     setPossibleMoves([]);
     setChessboard(chess.board());
   }
-  function handlePromotion() {
+  function handlePromotion(row, column) {
+    setPromotionDestination({row: row, column: column});
     setPromotionDialogOpened(true);
   }
   function handleDialogClosure() {
-    console.log("closed");
     setPromotionDialogOpened(false);
   }
 
@@ -88,8 +91,8 @@ export default function GameBoard() {
         {promotionDialogOpened ? (
           <PromotionDialog
             sideToMove={chess.turn()}
-            column={deconstructDefaultSquareNotation(activeSquare)[0]}
-            row={deconstructDefaultSquareNotation(activeSquare)[1]}
+            column={promotionDestination.column}
+            row={promotionDestination.row}
             onPromotionSelect={handleMove}
             onClose={handleDialogClosure}
           />
