@@ -1,7 +1,7 @@
 import "./Piece.scss";
 
 import PieceIcon from "../../assets/symbol-defs.svg";
-import { returnPieceIconName } from "../../utils";
+import { returnPieceIconName } from "../../utils/js/utils";
 
 export default function Piece({ data }) {
   return (

@@ -1,4 +1,6 @@
-@import "../../utils";
+@import "../../utils/style/utils";
+@import "../../utils/style/variables";
+
 @include font("Roboto Mono", "../../assets/RobotMono");
 .square {
   position: relative;
@@ -6,51 +8,51 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: $cell-size;
+  height: $cell-size;
   overflow: visible;
   z-index: 0;
   &-light {
-    background-color: bisque;
+    background-color: $color-side-white;
   }
 
   &-dark {
-    background-color: gray;
+    background-color: $color-side-black;
   }
   .coordinate {
     font-family: "RobotoMono", monospace;
     position: absolute;
-    line-height: 24px;
-    font-size: 20px;
+    line-height: calc($cell-size/5);
+    font-size: calc($cell-size/5);
     user-select: none;
 
     &-row {
       @extend .coordinate;
-      top: 6px;
-      left: 6px;
+      top: calc($cell-size/20);
+      left: calc($cell-size/20);
 
       &-light {
         @extend .coordinate-row;
-        color: gray;
+        color: $color-side-black;
       }
       &-dark {
         @extend .coordinate-row;
-        color: bisque;
+        color: $color-side-white;
       }
     }
     &-col {
       @extend .coordinate;
 
-      bottom: 6px;
-      right: 6px;
+      bottom: calc($cell-size/20);
+      right: calc($cell-size/20);
 
       &-light {
         @extend .coordinate-col;
-        color: gray;
+        color: $color-side-black;
       }
       &-dark {
         @extend .coordinate-col;
-        color: bisque;
+        color: $color-side-white;
       }
     }
   }
@@ -67,25 +69,25 @@
       @extend .possible-move;
 
       box-sizing: border-box;
-      width: 100px;
-      height: 100px;
-      border: 10px solid black;
+      width: $cell-size;
+      height: $cell-size;
+
+      border: calc($cell-size/10) solid black;
 
       &:hover {
-        border: 50px solid black;
+        border: calc($cell-size/2) solid black;
       }
     }
     &-empty {
       @extend .possible-move;
-
       background-color: black;
 
-      width: 40px;
-      height: 40px;
+      width: calc($cell-size * 0.4);
+      height: calc($cell-size * 0.4);
 
       &:hover {
-        width: 60px;
-        height: 60px;
+        width: calc($cell-size * 0.6);
+        height: calc($cell-size * 0.6);
       }
     }
   }

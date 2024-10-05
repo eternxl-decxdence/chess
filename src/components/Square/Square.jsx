@@ -3,7 +3,7 @@ import {
   columnIndexes,
   defaultSquareNotation,
   returnCornerClass
-} from "../../utils";
+} from "../../utils/js/utils";
 
 import { WHITE, BLACK, PAWN, KING } from "chess.js";
 

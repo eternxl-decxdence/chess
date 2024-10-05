@@ -1,3 +1,4 @@
+@import "../../utils/style/variables";
 .piece {
   display: flex;
   color: black;
@@ -5,14 +6,14 @@
 
   .icon {
     justify-self: center;
-    width: 88px;
-    height: 88px;
+    width: calc($cell-size * 0.88);
+    height: calc($cell-size * 0.88);
     transition: 150ms;
   }
   &:hover {
     .icon {
-      width: 96px;
-      height: 96px;
+      width: calc($cell-size * 0.96);
+      height: calc($cell-size * 0.96);
     }
   }
 }

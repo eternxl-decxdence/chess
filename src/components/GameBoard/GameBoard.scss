@@ -1,10 +1,12 @@
+@import "../../utils/style/variables";
+
 .board {
   position: absolute;
   display: flex;
   flex-direction: column;
 
   border-radius: 8px;
-  border: 2px solid black;
+  border: 2px solid $interface-color-secondary-shaded;
 
   overflow: hidden;
 
@@ -19,13 +21,14 @@
   align-items: center;
   flex-direction: column;
 
-  width: 820px;
-  height: 820px;
+  width: calc(20px + 8 * $cell-size);
+  height: calc(20px + 8 * $cell-size);
 
   border-radius: 17px;
-  border: 2px solid darkgray;
+  border: 2px solid $interface-color-main;
 
-  box-shadow: 0px 12px 20px 0px rgb(89, 89, 90);
+  box-shadow: 0px 12px 20px 0px $interface-color-main-shaded;
+
   .side-marker {
     width: 100%;
     height: 100%;
@@ -33,11 +36,11 @@
     border-radius: 15px;
     &-black {
       @extend .side-marker;
-      background-color: gray;
+      background-color: $color-side-black;
     }
     &-white {
       @extend .side-marker;
-      background-color: bisque;
+      background-color: $color-side-white;
     }
   }
 }
