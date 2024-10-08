@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/components/Piece/Piece.scss"],"names":[],"mappings":"AACA,OACE,YAAA,CACA,UAAA,CACA,WAAA,CAEA,aACE,mBAAA,CACA,UAAA,CACA,WAAA,CACA,gBAAA,CAGA,mBACE,UAAA,CACA,WAAA","file":"Piece.css"}
+{"version":3,"sources":["../src/components/Piece/Piece.scss"],"names":[],"mappings":"AACA,OACE,YAAA,CACA,UAAA,CACA,WAAA,CAEA,gCACE,mBAAA,CACA,UAAA,CACA,WAAA,CACA,gBAAA,CACA,mBAEE,SAAA,CAKF,4CACE,UAAA,CACA,WAAA","file":"Piece.css"}

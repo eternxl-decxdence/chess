@@ -1,11 +1,11 @@
 import "./PromotionDialog.scss";
-import crossIcon from "../../assets/cross.svg";
+import crossIcon from "../../assets/symbol-defs.svg";
 import { defaultSquareNotation } from "../../utils/js/utils";
 import { WHITE } from "chess.js";
 
 import Piece from "../Piece/Piece";
 import { useState } from "react";
-import { useEffect } from "react";
+
 export default function PromotionDialog({
   sideToMove,
   row,

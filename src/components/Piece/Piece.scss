@@ -9,7 +9,12 @@
     width: calc($cell-size * 0.88);
     height: calc($cell-size * 0.88);
     transition: 150ms;
+    &-white {
+      @extend .icon;
+      fill: white;
+    }
   }
+
   &:hover {
     .icon {
       width: calc($cell-size * 0.96);

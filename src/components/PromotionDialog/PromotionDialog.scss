@@ -10,9 +10,6 @@
 
   display: flex;
 
-  justify-content: space-between;
-  align-items: center;
-
   background-color: $interface-color-main-lighter;
 
   left: calc(var(--column-number) * 100px);
@@ -69,6 +66,7 @@ dialog.promotion-dialog[open] {
 }
 
 dialog.promotion-dialog:not([open]) {
+  animation: popoutAnimation 700ms ease-in-out;
 }
 
 .side-white {
@@ -81,8 +79,8 @@ dialog.promotion-dialog:not([open]) {
 .side-black {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  flex-direction: column-reverse;
   top: 350px;
+  flex-direction: column-reverse;
 }
 
 .promotion-dialog-overlay {
