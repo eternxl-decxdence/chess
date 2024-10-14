@@ -1,4 +1,4 @@
-import { useState, version } from "react";
+import { useState } from "react";
 import { Chess, WHITE } from "chess.js";
 import { defaultSquareNotation } from "../../utils/js/utils";
 
@@ -91,7 +91,6 @@ export default function GameBoard() {
                 onPieceSelect={handleSelection}
                 onPieceMove={handleMove}
                 onPromotion={handlePromotion}
-                b
               >
                 {square != null ? <Piece data={square} /> : null}
               </Square>
