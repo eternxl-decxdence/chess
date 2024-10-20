@@ -1,13 +1,12 @@
 @import "../../utils/style/variables";
 
 .board {
-  position: absolute;
   display: flex;
   flex-direction: column;
 
-  border-radius: 8px;
   border: 2px solid $interface-color-secondary-shaded;
-
+  width: calc($cell-size * 8);
+  height: calc($cell-size * 8);
   overflow: hidden;
 
   .row-wrapper {
@@ -21,12 +20,12 @@
   align-items: center;
   flex-direction: column;
 
-  width: calc(20px + 8 * $cell-size);
-  height: calc(20px + 8 * $cell-size);
+  justify-self: center;
+  align-self: center;
+  padding: 12px;
 
-  border-radius: 17px;
-  border: 2px solid $interface-color-main;
-
+  border-radius: 4px;
+  background-color: #8f8f8f;
   box-shadow: 0px 12px 20px 0px $interface-color-main-shaded;
 
   .side-marker {

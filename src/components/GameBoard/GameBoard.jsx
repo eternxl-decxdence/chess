@@ -59,42 +59,42 @@ export default function GameBoard() {
       setGameOver(true);
     }
   }
+  function drawSquare(indexCol, indexRow, square) {
+    return (
+      <Square
+        activeSquareData={activeSquare}
+        key={defaultSquareNotation(indexCol, indexRow)}
+        squareData={square}
+        row={indexRow}
+        column={indexCol}
+        chess={chess}
+        isPossibleMove={
+          possibleMoves != null &&
+          possibleMoves.includes(defaultSquareNotation(indexCol, indexRow))
+        }
+        isLastMove={
+          chess.history().length > 0 &&
+          (chess.history({ verbose: true })[chess.history().length - 1].from ==
+            defaultSquareNotation(indexCol, indexRow) ||
+            chess.history({ verbose: true })[chess.history().length - 1].to ==
+              defaultSquareNotation(indexCol, indexRow))
+        }
+        onPieceSelect={handleSelection}
+        onPieceMove={handleMove}
+        onPromotion={handlePromotion}
+      >
+        {square != null ? <Piece data={square} /> : null}
+      </Square>
+    );
+  }
   return (
     <div className='board-wrapper'>
-      <div
-        className={`side-marker-${chess.turn() === WHITE ? "white" : "black"}`}
-      ></div>
       <div className='board'>
         {chessboard.map((boardRow, indexRow) => (
           <div key={indexRow} className='row-wrapper'>
-            {boardRow.map((square, indexCol) => (
-              <Square
-                activeSquareData={activeSquare}
-                key={defaultSquareNotation(indexCol, indexRow)}
-                squareData={square}
-                row={indexRow}
-                column={indexCol}
-                chess={chess}
-                isPossibleMove={
-                  possibleMoves != null &&
-                  possibleMoves.includes(
-                    defaultSquareNotation(indexCol, indexRow)
-                  )
-                }
-                isLastMove={
-                  chess.history().length > 0 &&
-                  (chess.history({ verbose: true })[chess.history().length - 1]
-                    .from == defaultSquareNotation(indexCol, indexRow) ||
-                    chess.history({ verbose: true })[chess.history().length - 1]
-                      .to == defaultSquareNotation(indexCol, indexRow))
-                }
-                onPieceSelect={handleSelection}
-                onPieceMove={handleMove}
-                onPromotion={handlePromotion}
-              >
-                {square != null ? <Piece data={square} /> : null}
-              </Square>
-            ))}
+            {boardRow.map((square, indexCol) =>
+              drawSquare(indexCol, indexRow, square)
+            )}
           </div>
         ))}
         {promotionDialogOpened ? (

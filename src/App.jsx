@@ -1,8 +1,8 @@
 import { useState } from "react";
-import GameBoard from "./components/GameBoard/GameBoard";
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import GamePage from "./pages/GamePage/GamePage";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route index element={<GameBoard />} />
+          <Route index element={<GamePage />} />
         </Routes>
       </BrowserRouter>
     </>

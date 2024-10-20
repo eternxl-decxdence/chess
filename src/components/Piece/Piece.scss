@@ -9,9 +9,17 @@
     width: calc($cell-size * 0.88);
     height: calc($cell-size * 0.88);
     transition: 150ms;
+    stroke-width: 1px;
+    paint-order: stroke;
     &-white {
       @extend .icon;
-      fill: white;
+      fill: #d9d9d9;
+      stroke: #202020;
+    }
+    &-black {
+      @extend .icon;
+      fill: #444444;
+      stroke: #202020;
     }
   }
 

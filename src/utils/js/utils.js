@@ -12,22 +12,17 @@ import {
 export function returnPieceIconName(pieceObj) {
   let iconId = "icon-";
   if (pieceObj.type == PAWN) {
-    iconId += "pawn-";
+    iconId += "pawn";
   } else if (pieceObj.type == QUEEN) {
-    iconId += "queen-";
+    iconId += "queen";
   } else if (pieceObj.type == KING) {
-    iconId += "king-";
+    iconId += "king";
   } else if (pieceObj.type == ROOK) {
-    iconId += "rook-";
+    iconId += "rook";
   } else if (pieceObj.type == KNIGHT) {
-    iconId += "knight-";
+    iconId += "knight";
   } else if (pieceObj.type == BISHOP) {
-    iconId += "bishop-";
-  }
-  if (pieceObj.color == WHITE) {
-    iconId += "white";
-  } else if (pieceObj.color == BLACK) {
-    iconId += "black";
+    iconId += "bishop";
   }
   return iconId;
 }
