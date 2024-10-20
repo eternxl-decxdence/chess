@@ -1,1 +1,1 @@
-.piece{display:flex;color:#000;cursor:grab}.piece .icon,.piece .icon-black,.piece .icon-white{justify-self:center;width:66px;height:66px;transition:150ms;stroke-width:1px;paint-order:stroke}.piece .icon-white{fill:#d9d9d9;stroke:#202020}.piece .icon-black{fill:#444;stroke:#202020}.piece:hover .icon,.piece:hover .icon-white,.piece:hover .icon-black{width:72px;height:72px}/*# sourceMappingURL=Piece.css.map */
+/*# sourceMappingURL=Piece.css.map */

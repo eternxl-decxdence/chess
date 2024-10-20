@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/components/GameBoard/GameBoard.scss","../src/utils/style/_variables.scss"],"names":[],"mappings":"AAEA,OACE,YAAA,CACA,qBAAA,CAEA,wBAAA,CACA,WAAA,CACA,YAAA,CACA,eAAA,CAEA,oBACE,YAAA,CACA,kBAAA,CAGJ,eACE,YAAA,CACA,sBAAA,CACA,kBAAA,CACA,qBAAA,CAEA,mBAAA,CACA,iBAAA,CACA,YAAA,CAEA,iBAAA,CACA,wBAAA,CACA,oCAAA,CAEA,gGACE,UAAA,CACA,WAAA,CACA,aAAA,CACA,kBAAA,CACA,kCAEE,wBClCa,CDoCf,kCAEE,wBCvCa","file":"GameBoard.css"}
+{"version":3,"sources":[],"names":[],"mappings":"","file":"GameBoard.css"}

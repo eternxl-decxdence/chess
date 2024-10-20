@@ -1,13 +1,4 @@
-import {
-  PAWN,
-  ROOK,
-  KNIGHT,
-  BISHOP,
-  QUEEN,
-  KING,
-  BLACK,
-  WHITE
-} from "chess.js";
+import { PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING } from "chess.js";
 
 export function returnPieceIconName(pieceObj) {
   let iconId = "icon-";
@@ -30,15 +21,3 @@ export function defaultSquareNotation(column, row) {
   return `${columnIndexes[column]}${(row - 8) * -1}`;
 }
 export const columnIndexes = ["a", "b", "c", "d", "e", "f", "g", "h"];
-
-export function returnCornerClass(row, col) {
-  if (row == 0 && col == 0) {
-    return "top-left";
-  } else if (row == 0 && col == 7) {
-    return "top-right";
-  } else if (row == 7 && col == 0) {
-    return "bottom-left";
-  } else if (row == 7 && col == 7) {
-    return "bottom-right";
-  }
-}
