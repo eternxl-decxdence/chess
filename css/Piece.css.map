@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"Piece.css"}
+{"version":3,"sources":["../src/components/Piece/Piece.scss"],"names":[],"mappings":"AAAA,gBACE,iBAAA,CACA,YAAA,CACA,sBAAA,CACA,kBAAA,CAEA,qBAAA,CACA,UAAA,CACA,WAAA,CAEF,iCACE,iBAAA,CACA,WAAA,CAEA,UAAA,CACA,WAAA,CACA,kBAAA,CAEA,gBAAA,CACA,cAAA,CACA,aAEE,YAAA,CAEF,aAEE,SAAA","file":"Piece.css"}

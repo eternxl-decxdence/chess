@@ -1,0 +1,98 @@
+// row coordinate style
+@mixin coordinate($color) {
+  position: absolute;
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  line-height: 12px;
+
+  color: $color;
+}
+@mixin row-coordinate($color) {
+  @include coordinate($color);
+
+  top: 8px;
+  left: 8px;
+}
+@mixin col-coordinate($color) {
+  @include coordinate($color);
+
+  bottom: 8px;
+  right: 8px;
+}
+// column coordinate
+
+//apply row coordinates
+.square:nth-child(1)::before {
+  @include row-coordinate(#3c3c3c);
+
+  content: "8";
+}
+.square:nth-child(9)::before {
+  @include row-coordinate(#d6d6d6);
+
+  content: "7";
+}
+.square:nth-child(17)::before {
+  @include row-coordinate(#3c3c3c);
+
+  content: "6";
+}
+.square:nth-child(25)::before {
+  @include row-coordinate(#d6d6d6);
+
+  content: "5";
+}
+.square:nth-child(33)::before {
+  @include row-coordinate(#3c3c3c);
+
+  content: "4";
+}
+.square:nth-child(41)::before {
+  @include row-coordinate(#d6d6d6);
+
+  content: "3";
+}
+.square:nth-child(49)::before {
+  @include row-coordinate(#3c3c3c);
+
+  content: "2";
+}
+.square:nth-child(57)::before {
+  @include row-coordinate(#d6d6d6);
+
+  content: "1";
+}
+
+// apply column coordinates
+.square:nth-child(57)::after {
+  @include col-coordinate(#d6d6d6);
+  content: "a";
+}
+.square:nth-child(58)::after {
+  @include col-coordinate(#3c3c3c);
+  content: "b";
+}
+.square:nth-child(59)::after {
+  @include col-coordinate(#d6d6d6);
+  content: "c";
+}
+.square:nth-child(60)::after {
+  @include col-coordinate(#3c3c3c);
+  content: "d";
+}
+.square:nth-child(61)::after {
+  @include col-coordinate(#d6d6d6);
+  content: "e";
+}
+.square:nth-child(62)::after {
+  @include col-coordinate(#3c3c3c);
+  content: "f";
+}
+.square:nth-child(63)::after {
+  @include col-coordinate(#d6d6d6);
+  content: "g";
+}
+.square:nth-child(64)::after {
+  @include col-coordinate(#3c3c3c);
+  content: "h";
+}

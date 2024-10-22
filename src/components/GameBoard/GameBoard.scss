@@ -1,0 +1,35 @@
+@import "../../utils/style/utils";
+@include font("Roboto Mono", "../../assets/RobotoMono");
+
+.board {
+  display: grid;
+
+  width: 640px;
+  height: 640px;
+  background-color: #3c3c3c;
+
+  grid-template-columns: repeat(8, 80px);
+  grid-template-rows: repeat(8, 80px);
+
+  .square {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    width: 80px;
+    height: 80px;
+  }
+  // white squares
+
+  .square:nth-child(odd):nth-child(-n + 8),
+  .square:nth-child(even):nth-child(n + 9):nth-child(-n + 16),
+  .square:nth-child(odd):nth-child(n + 17):nth-child(-n + 24),
+  .square:nth-child(even):nth-child(n + 25):nth-child(-n + 32),
+  .square:nth-child(odd):nth-child(n + 33):nth-child(-n + 40),
+  .square:nth-child(even):nth-child(n + 41):nth-child(-n + 48),
+  .square:nth-child(odd):nth-child(n + 49):nth-child(-n + 56),
+  .square:nth-child(even):nth-child(n + 57):nth-child(-n + 64) {
+    background-color: #d6d6d6;
+  }
+}

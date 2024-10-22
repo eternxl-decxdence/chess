@@ -1,0 +1,29 @@
+.piece-icon-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 80px;
+  height: 80px;
+}
+.piece {
+  position: absolute;
+  bottom: -3px;
+
+  width: 80px;
+  height: 80px;
+  paint-order: stroke;
+
+  stroke-width: 1px;
+  stroke: #202020;
+  &-white {
+    @extend .piece;
+    fill: #d9d9d9;
+  }
+  &-black {
+    @extend .piece;
+    fill: #444;
+  }
+}

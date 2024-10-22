@@ -1,1 +1,1 @@
-/*# sourceMappingURL=Piece.css.map */
+.piece-icon-box{position:relative;display:flex;justify-content:center;align-items:center;box-sizing:border-box;width:80px;height:80px}.piece,.piece-black,.piece-white{position:absolute;bottom:-3px;width:80px;height:80px;paint-order:stroke;stroke-width:1px;stroke:#202020}.piece-white{fill:#d9d9d9}.piece-black{fill:#444}/*# sourceMappingURL=Piece.css.map */
