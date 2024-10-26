@@ -1,26 +1,47 @@
-import { PAWN, WHITE, BLACK } from "chess.js";
+import { PAWN, KING, WHITE, BLACK } from "chess.js";
 import Piece from "../Piece/Piece";
 import "./Square.scss";
 export default function Square({
   position,
-  squareData, 
-  isPossibleMove, 
+  activeSquare,
+  squareData,
+  isPossibleMove,
   onSquareSelect,
   onPromotion,
-  onMove}) {
-  const possibleMoveClick = 
-    (squareData == {type: PAWN, color: WHITE} && position.row == 0) ||
-    (squareData == {type: PAWN, color: BLACK} && position.row == 7) ?
-      ( () => onPromotion(squareData.square)) :
-      ( () => onMove(squareData.square))
+  onMove,
+  chess
+}) {
+  function handlePossibleMoveClick() {
+    if (
+      activeSquare.type == PAWN &&
+      ((activeSquare.color == WHITE && position.row == 0) ||
+        (activeSquare.color == BLACK && position.row == 7))
+    ) {
+      console.log(position);
+      onPromotion(squareData.square, position);
+    } else {
+      onMove(squareData.square);
+    }
+  }
+
   return (
-    <div 
-      onClick={squareData && (() => onSquareSelect(squareData))}
-      className='square'>
-        {squareData.type && <Piece pieceData={squareData} />}
-        {isPossibleMove && 
-          <div onClick={possibleMoveClick}
-          className={`possible-move${squareData.type ? '-attack' : ""}`}></div>}
+    <div
+      onClick={squareData.type && (() => onSquareSelect(squareData))}
+      className={`square${
+        chess.inCheck() &&
+        squareData.type == KING &&
+        squareData.color == chess.turn()
+          ? "-checked"
+          : ""
+      }`}
+    >
+      {squareData.type && <Piece pieceData={squareData} />}
+      {isPossibleMove && (
+        <div
+          onClick={handlePossibleMoveClick}
+          className={`possible-move${squareData.type ? "-attack" : ""}`}
+        ></div>
+      )}
     </div>
-  )
+  );
 }

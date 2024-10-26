@@ -2,7 +2,10 @@
 @include font("Roboto Mono", "../../assets/RobotoMono");
 
 .board {
+  position: relative;
   display: grid;
+
+  overflow: hidden;
 
   width: 640px;
   height: 640px;
@@ -23,6 +26,7 @@
     width: 80px;
     height: 80px;
   }
+
   // white squares
 
   .square:nth-child(odd):nth-child(-n + 8),

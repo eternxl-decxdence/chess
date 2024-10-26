@@ -1,0 +1,29 @@
+.promotion-dialog-overlay {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+
+  .promotion-dialog {
+    --row: 0;
+    --col: 0;
+    position: relative;
+    display: flex;
+    width: 80px;
+    top: calc(var(--row) * 80px);
+    left: calc(var(--col) * 80px);
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    overflow: hidden;
+
+    box-shadow: 0 0 8px 0 #000;
+    .promotion-button {
+      margin: 0;
+      padding: 0;
+
+      background: none;
+      border: none;
+    }
+  }
+}
