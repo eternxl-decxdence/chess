@@ -1,31 +1,27 @@
-import { PAWN, KING, WHITE, BLACK } from "chess.js";
+import {KING} from "chess.js";
+import {useDroppable} from "@dnd-kit/core";
 import Piece from "../Piece/Piece";
 import "./Square.scss";
 export default function Square({
   position,
-  activeSquare,
   squareData,
   isPossibleMove,
   onSquareSelect,
-  onPromotion,
   onMove,
   chess
 }) {
+  const {setNodeRef} = useDroppable({
+    id: squareData.square,
+    data: position
+  })
   function handlePossibleMoveClick() {
-    if (
-      activeSquare.type == PAWN &&
-      ((activeSquare.color == WHITE && position.row == 0) ||
-        (activeSquare.color == BLACK && position.row == 7))
-    ) {
-      console.log(position);
-      onPromotion(squareData.square, position);
-    } else {
-      onMove(squareData.square);
-    }
+    onMove(squareData.square, position);
   }
+
 
   return (
     <div
+      ref={setNodeRef}
       onClick={squareData.type && (() => onSquareSelect(squareData))}
       className={`square${
         chess.inCheck() &&
@@ -35,7 +31,8 @@ export default function Square({
           : ""
       }`}
     >
-      {squareData.type && <Piece pieceData={squareData} />}
+      {squareData.type && 
+        <Piece draggable={true} pieceData={squareData} />}
       {isPossibleMove && (
         <div
           onClick={handlePossibleMoveClick}

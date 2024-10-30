@@ -1,8 +1,8 @@
 import { Chess } from "chess.js";
-import { act, useState } from "react";
+import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import { defaultSquareNotation } from "../../utils/js/utils";
-
+import { PAWN, WHITE, BLACK} from "chess.js";
 import "./GameBoard.scss";
 import "./Coordinates.scss";
 import Square from "../Square/Square";
@@ -21,22 +21,39 @@ export default function GameBoard() {
     dialogPosition: { col: null, row: null }
   });
 
+  function handleDragStart(event) {
+    onSquareSelection(event.active.data.current);
+    console.log(event.active.data.current);
+  }
+  function handleDragEnd(event) {
+    console.log(event);
+    onMove(event.over.id, event.over.data.current);
+  }
+
+
   function onSquareSelection(square) {
-    console.log();
     if (square.color === chess.turn()) {
       setActiveSquare(square);
     }
   }
 
-  function onMove(to) {
-    chess.move({ from: activeSquare.square, to: to });
-    setChessboard(chess.board());
-    setActiveSquare(null);
+  function onMove(to, position) {
+    if (
+      activeSquare.type == PAWN &&
+      ((activeSquare.color == WHITE && position.row == 0) ||
+        (activeSquare.color == BLACK && position.row == 7))
+    ) {
+      onPromotion(to, position);
+    } else {
+      chess.move({ from: activeSquare.square, to: to });
+      setChessboard(chess.board());
+      setActiveSquare(null);
+    }
+    
   }
 
   function onPromotion(to, position) {
     setPromotion({ active: true, moveTo: to, dialogPosition: position });
-    console.log(position);
   }
 
   function promoteMove(to, pieceType) {
@@ -46,7 +63,6 @@ export default function GameBoard() {
     setActiveSquare(null);
   }
   function handleDialogClosure() {
-    console.log("closed");
     setPromotion({
       active: false,
       moveTo: null,
@@ -55,7 +71,8 @@ export default function GameBoard() {
   }
 
   return (
-    <DndContext>
+    <DndContext onDragStart={handleDragStart}
+    onDragEnd={handleDragEnd}>
       <div className='board'>
         {chessboard.map((row, rowIndex) =>
           row.map((square, colIndex) => (
@@ -68,7 +85,6 @@ export default function GameBoard() {
                   ? square
                   : { square: defaultSquareNotation(colIndex, rowIndex) }
               }
-              activeSquare={activeSquare}
               isPossibleMove={
                 activeSquare !== null &&
                 chess
@@ -78,7 +94,6 @@ export default function GameBoard() {
               }
               onSquareSelect={onSquareSelection}
               onMove={onMove}
-              onPromotion={onPromotion}
             />
           ))
         )}
