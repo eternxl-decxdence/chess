@@ -23,7 +23,6 @@ export default function GameBoard() {
 
   function handleDragStart(event) {
     onSquareSelection(event.active.data.current);
-    console.log(event);
   }
   function handleDragEnd(event) {
     console.log(event);
@@ -84,6 +83,7 @@ export default function GameBoard() {
               chess={chess}
               position={{ col: colIndex, row: rowIndex }}
               key={`${colIndex}${rowIndex}`}
+              activeSquare={activeSquare}
               squareData={
                 square
                   ? square
