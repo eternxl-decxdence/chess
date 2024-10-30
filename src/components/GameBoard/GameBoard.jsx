@@ -53,6 +53,7 @@ export default function GameBoard() {
       dialogPosition: { col: null, row: null }
     });
   }
+
   return (
     <DndContext>
       <div className='board'>
