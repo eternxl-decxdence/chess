@@ -14,8 +14,7 @@ export default function Piece({ pieceData, draggable }) {
       data: pieceData
     });
   const styleTransform = {
-    transform: CSS.Translate.toString(transform),
-    zIndex: 1000
+    transform: CSS.Translate.toString(transform)
   };
 
   return (
@@ -24,13 +23,9 @@ export default function Piece({ pieceData, draggable }) {
       style={styleTransform}
       {...listeners}
       {...attributes}
-      className='piece-icon-box'
+      className={`piece-icon-box ${isDragging ? "active" : ""}`}
     >
-      <svg
-        className={`piece${pieceData.color == WHITE ? "-white" : "-black"} ${
-          isDragging ? "active" : ""
-        }`}
-      >
+      <svg className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}>
         <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
       </svg>
     </span>

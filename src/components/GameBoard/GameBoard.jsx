@@ -24,6 +24,7 @@ export default function GameBoard() {
   function handleDragStart(event) {
     onSquareSelection(event.active.data.current);
   }
+
   function handleDragEnd(event) {
     console.log(event);
     if (
