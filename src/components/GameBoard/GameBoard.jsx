@@ -8,13 +8,14 @@ import "./Coordinates.scss";
 import Square from "../Square/Square";
 import PromotionDialog from "../PromotionDialog/PromotionDialog";
 
-const chess = new Chess();
+//const chess = new Chess();
 
-//const chess = new Chess("1K6/PPPPPPPP/8/8/8/8/pppppppp/6k1 w - - 0 1");
+const chess = new Chess("1K6/PPPPPPPP/8/8/8/8/pppppppp/6k1 w - - 0 1");
 
 export default function GameBoard() {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
+  const [lastMoves, setLastMoves] = useState([]);
   const [promotion, setPromotion] = useState({
     active: false,
     moveTo: null,
@@ -22,18 +23,22 @@ export default function GameBoard() {
   });
 
   function handleDragStart(event) {
-    onSquareSelection(event.active.data.current);
+    const { active } = event;
+    if (active.data.current.color === chess.turn()) {
+      onSquareSelection(active.data.current);
+    }
   }
 
   function handleDragEnd(event) {
-    console.log(event);
-    if (
-      chess
-        .moves({ square: activeSquare.square, verbose: true })
-        .map(({ to }) => to)
-        .includes(event.over.id)
-    ) {
-      onMove(event.over.id, event.over.data.current);
+    if (activeSquare != null) {
+      if (
+        chess
+          .moves({ square: activeSquare.square, verbose: true })
+          .map(({ to }) => to)
+          .includes(event.over.id)
+      ) {
+        onMove(event.over.id, event.over.data.current);
+      }
     }
   }
 
@@ -52,6 +57,7 @@ export default function GameBoard() {
       onPromotion(to, position);
     } else {
       chess.move({ from: activeSquare.square, to: to });
+      setLastMoves([activeSquare.square, to]);
       setChessboard(chess.board());
       setActiveSquare(null);
     }
@@ -63,6 +69,7 @@ export default function GameBoard() {
 
   function promoteMove(to, pieceType) {
     chess.move({ from: activeSquare.square, to: to, promotion: pieceType });
+    setLastMoves([activeSquare.square, to]);
     handleDialogClosure();
     setChessboard(chess.board());
     setActiveSquare(null);
@@ -84,7 +91,6 @@ export default function GameBoard() {
               chess={chess}
               position={{ col: colIndex, row: rowIndex }}
               key={`${colIndex}${rowIndex}`}
-              activeSquare={activeSquare}
               squareData={
                 square
                   ? square
@@ -97,6 +103,9 @@ export default function GameBoard() {
                   .map(({ to }) => to)
                   .includes(defaultSquareNotation(colIndex, rowIndex))
               }
+              isLastMove={lastMoves.includes(
+                defaultSquareNotation(colIndex, rowIndex)
+              )}
               onSquareSelect={onSquareSelection}
               onMove={onMove}
             />

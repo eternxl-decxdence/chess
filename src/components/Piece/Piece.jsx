@@ -13,11 +13,12 @@ export default function Piece({ pieceData, draggable }) {
       id: pieceData.square,
       data: pieceData
     });
+
   const styleTransform = {
     transform: CSS.Translate.toString(transform)
   };
 
-  return (
+  const draggablePiece = (
     <span
       ref={setNodeRef}
       style={styleTransform}
@@ -30,4 +31,17 @@ export default function Piece({ pieceData, draggable }) {
       </svg>
     </span>
   );
+
+  const nonDraggablePiece = (
+    <span
+      onTransitionEnd={(e) => e.stopPropagation()}
+      className={`piece-icon-box non-draggable`}
+    >
+      <svg className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}>
+        <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
+      </svg>
+    </span>
+  );
+
+  return draggable ? draggablePiece : nonDraggablePiece;
 }

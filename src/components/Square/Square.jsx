@@ -4,12 +4,12 @@ import Piece from "../Piece/Piece";
 import "./Square.scss";
 export default function Square({
   position,
-  activeSquare,
   squareData,
   isPossibleMove,
   onSquareSelect,
   onMove,
-  chess
+  chess,
+  isLastMove
 }) {
   const { setNodeRef } = useDroppable({
     id: squareData.square,
@@ -29,11 +29,9 @@ export default function Square({
         squareData.color == chess.turn()
           ? "-checked"
           : ""
-      }`}
+      }${isLastMove ? " last-move" : ""}`}
     >
-      {squareData.type && (
-        <Piece draggable={squareData == activeSquare} pieceData={squareData} />
-      )}
+      {squareData.type && <Piece draggable={true} pieceData={squareData} />}
       {isPossibleMove && (
         <div
           onClick={handlePossibleMoveClick}

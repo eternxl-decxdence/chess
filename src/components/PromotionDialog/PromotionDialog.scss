@@ -2,13 +2,16 @@
   position: absolute;
   width: 640px;
   height: 640px;
+  z-index: 10000;
 
   .promotion-dialog {
+    z-index: 20000;
     --row: 0;
     --col: 0;
-    position: relative;
+    position: absolute;
     display: flex;
     width: 80px;
+    height: 320px;
     top: calc(var(--row) * 80px);
     left: calc(var(--col) * 80px);
     border: none;
@@ -18,6 +21,9 @@
     overflow: hidden;
 
     box-shadow: 0 0 8px 0 #000;
+
+    transition: 300ms ease-out;
+
     .promotion-button {
       margin: 0;
       padding: 0;
@@ -25,5 +31,38 @@
       background: none;
       border: none;
     }
+  }
+}
+
+.promotion-dialog.white[open] {
+  animation: 300ms ease-in 1 dialogOpenWhite;
+}
+.promotion-dialog.black[open] {
+  animation: 300ms ease-in 1 dialogOpenBlack;
+}
+.promotion-dialog.white.closed {
+  height: 0;
+}
+.promotion-dialog.black.closed {
+  height: 0;
+  top: 640px;
+}
+@keyframes dialogOpenWhite {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 320px;
+  }
+}
+
+@keyframes dialogOpenBlack {
+  0% {
+    height: 0px;
+    top: 640px;
+  }
+  100% {
+    height: 320px;
+    top: 320px;
   }
 }
