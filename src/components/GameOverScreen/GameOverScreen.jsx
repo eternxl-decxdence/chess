@@ -1,7 +1,12 @@
+import "./GameOverScreen.scss";
+
+
 export default function GameOverScreen() {
   return (
     <div className='game-over-dialog-overlay'>
-      <div className='game-over-dialog'></div>
+      <dialog open className='game-over-dialog'>
+        <h2 className='winner-label'> White won!</h2>
+      </dialog>
     </div>
   );
 }
