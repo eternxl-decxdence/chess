@@ -58,6 +58,10 @@
     margin: 0;
     box-sizing: border-box;
 
+    .card-separator {
+      width: 100%;
+    }
+
     .player-card {
       display: flex;
 
@@ -67,6 +71,7 @@
       width: 100%;
 
       box-sizing: border-box;
+      
       .player-profile {
         display: flex;
 

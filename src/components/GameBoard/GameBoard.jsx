@@ -8,11 +8,9 @@ import "./Coordinates.scss";
 import Square from "../Square/Square";
 import PromotionDialog from "../PromotionDialog/PromotionDialog";
 
-//const chess = new Chess();
 
-const chess = new Chess("1K6/PPPPPPPP/8/8/8/8/pppppppp/6k1 w - - 0 1");
 
-export default function GameBoard({ takenPieces }) {
+export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
   const [lastMoves, setLastMoves] = useState([]);
@@ -57,6 +55,8 @@ export default function GameBoard({ takenPieces }) {
       onPromotion(to, position);
     } else {
       chess.move({ from: activeSquare.square, to: to });
+      checkCapture();
+      checkGameOver();
       setLastMoves([activeSquare.square, to]);
       setChessboard(chess.board());
       setActiveSquare(null);
@@ -69,6 +69,8 @@ export default function GameBoard({ takenPieces }) {
 
   function promoteMove(to, pieceType) {
     chess.move({ from: activeSquare.square, to: to, promotion: pieceType });
+    checkCapture();
+    checkGameOver();
     setLastMoves([activeSquare.square, to]);
     handleDialogClosure();
     setChessboard(chess.board());
@@ -81,7 +83,40 @@ export default function GameBoard({ takenPieces }) {
       dialogPosition: { col: null, row: null }
     });
   }
+  
+  function checkGameOver(){
 
+    if (chess.isCheckmate()) {
+      onGameOver("Checkmate");
+    }
+    else if (chess.isStalemate()) {
+      onGameOver("Stalemate");
+
+    }
+    else if (chess.isInsufficientMaterial()) {
+      onGameOver("Insufficient Material");
+
+    }
+    else if (chess.isThreefoldRepetition()) {
+      onGameOver("Threefold Repetition");
+   
+    }
+    else if (chess.isDraw()) {
+      onGameOver("Draw")
+
+    }
+    else {}
+  }
+  function checkCapture(){
+    let moves = chess.history({verbose:true});
+    let lastMove = moves[moves.length-1];
+    if (lastMove.captured) {
+      console.log('captured')
+      console.log(chess);
+      onPieceCapture(lastMove.captured, (chess.turn() == WHITE ? BLACK : WHITE));
+      console.log(chess);
+    }
+  }
   return (
     <div className='board'>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
