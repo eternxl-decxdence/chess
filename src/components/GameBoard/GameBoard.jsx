@@ -12,7 +12,7 @@ import PromotionDialog from "../PromotionDialog/PromotionDialog";
 
 const chess = new Chess("1K6/PPPPPPPP/8/8/8/8/pppppppp/6k1 w - - 0 1");
 
-export default function GameBoard() {
+export default function GameBoard({ takenPieces }) {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
   const [lastMoves, setLastMoves] = useState([]);

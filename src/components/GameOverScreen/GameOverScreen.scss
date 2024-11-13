@@ -1,18 +1,140 @@
+@import "../../utils/style/utils";
+
+@include font("Open Sans", "../../assets/OpenSans");
+
 .game-over-dialog {
+  border: none;
+  border-radius: 4px;
 
+  width: 496px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
 
-    border: none;
+  gap: 10px;
+
+  background-color: #8f8f8f;
+
+  box-shadow: 0 4px 4px 0 #00000055;
+
+  .header-wrapper {
+    width: 100%;
+    background-color: #2d2d2d;
     border-radius: 4px;
-}   
-.game-over-dialog-overlay {
-    position: absolute;
-    z-index: 100000;
+    padding: 4px 0;
+
+    box-shadow: 0 4px 4px 0 #00000055;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 100vw ;
-    height: 100vh;
-    backdrop-filter: blur(4px);
+    .header-label {
+      margin: 0;
+      padding: 0;
+
+      color: #d9d9d9;
+      font-family: "Open Sans", sans-serif;
+      font-size: 20px;
+      font-weight: 200;
+    }
+  }
+
+  .players-statistics-wrapper {
+    background-color: #2d2d2d;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px 0 #00000055;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+
+    padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
+
+    .player-card {
+      display: flex;
+
+      flex-direction: row;
+
+      gap: 10px;
+      width: 100%;
+
+      box-sizing: border-box;
+      .player-profile {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid #444444;
+        border-radius: 4px;
+        width: 96px;
+        height: 96px;
+
+        .placeholder-logo {
+          width: 48px;
+          height: 48px;
+
+          fill: #444444;
+        }
+      }
+      .player-data-wrapper {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 10px;
+
+        margin: 0;
+        padding: 0;
+
+        .name-wrapper {
+          display: flex;
+
+          flex-direction: row;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 10px;
+          padding: 4px 0;
+          margin: 0;
+
+          .name-text {
+            font-family: "Open Sans", sans-serif;
+            font-size: 20px;
+            font-weight: 100;
+            color: #d9d9d9;
+          }
+
+          hr {
+            height: 100%;
+            border: 0.5px solid #d9d9d9;
+          }
+        }
+      }
+    }
+  }
 }
 
+.game-over-dialog-overlay {
+  position: absolute;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(4px);
+}
