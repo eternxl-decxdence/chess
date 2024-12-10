@@ -2,9 +2,11 @@ import Header from "../../components/Header/Header";
 import GameBoard from "../../components/GameBoard/GameBoard";
 import GameOverScreen from "../../components/GameOverScreen/GameOverScreen";
 import Timer from "../../components/Timer/Timer";
+import BoardControls from "../../components/BoardControls/BoardControls";
 import { WHITE, PAWN, ROOK, QUEEN, KNIGHT, BISHOP, BLACK } from "chess.js";
 import "./GamePage.scss";
 import { useState } from "react";
+import PlayerWidget from "../../components/PlayerWidget/PlayerWidget";
 
 export default function GamePage({ chess, onReset }) {
   const [capturedPieces, setCapturedPieces] = useState({
@@ -17,8 +19,7 @@ export default function GamePage({ chess, onReset }) {
 
   console.log(chess);
   function handleTimeout() {
-    console.log("timeout");
-    setGameOver({ gameOver: true, reason: "timeout" });
+    setGameOver({ gameOver: true, reason: "Timeout" });
   }
   function handleRestart() {
     onReset();
@@ -48,7 +49,18 @@ export default function GamePage({ chess, onReset }) {
   return (
     <div className='game-page'>
       <Header />
-
+      <div className='player-widgets-wrapper'>
+        <PlayerWidget
+          playerName={"Player 1"}
+          color={WHITE}
+          pieces={capturedPieces.white}
+        />
+        <PlayerWidget
+          playerName={"Player 2"}
+          color={BLACK}
+          pieces={capturedPieces.black}
+        />
+      </div>
       <div className='game-board-wrapper'>
         <GameBoard
           chess={chess}

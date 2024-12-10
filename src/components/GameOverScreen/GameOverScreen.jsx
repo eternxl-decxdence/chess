@@ -1,6 +1,6 @@
 import { BLACK, WHITE } from "chess.js";
 import Spirtesheet from "../../assets/symbol-defs.svg";
-import SmallPiece from "./SmallPiece";
+import SmallPiece from "../SmallPiece/SmallPiece";
 import "./GameOverScreen.scss";
 
 export default function GameOverScreen({ reason, capturedPieces, onRestart }) {

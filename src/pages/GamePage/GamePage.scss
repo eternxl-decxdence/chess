@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 57px;
 }
 
 .game-board-wrapper {
@@ -15,6 +16,7 @@
   width: fit-content;
   height: fit-content;
 
+  align-self: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -24,6 +26,7 @@
 
   box-shadow: 0 4px 4px 0 #00000055;
 }
+
 .timers-wrapper {
   display: flex;
   align-items: center;
@@ -32,4 +35,12 @@
   padding: 0;
   margin: 0;
   width: 100%;
+}
+
+.player-widgets-wrapper {
+  height: 724px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: space-between;
 }

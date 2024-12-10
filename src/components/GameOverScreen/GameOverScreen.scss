@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   padding: 12px;
-
   gap: 10px;
 
   background-color: #8f8f8f;
@@ -171,6 +170,10 @@
   }
 }
 
+.game-over-dialog[open] {
+  animation: 600ms dialogOpen;
+}
+
 .game-over-dialog-overlay {
   position: absolute;
   z-index: 100000;
@@ -181,4 +184,12 @@
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(4px);
+}
+@keyframes dialogOpen {
+  from {
+    margin-top: -1200px;
+  }
+  to {
+    margin-top: 0;
+  }
 }
