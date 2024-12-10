@@ -19,6 +19,38 @@
 
   box-shadow: 0 4px 4px 0 #00000055;
 
+  .buttons-wrapper {
+    width: 100%;
+
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    .restart-button {
+      padding: 4px 0;
+      color: #d9d9d9;
+      background-color: #2d2d2d;
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Open Sans", sans-serif;
+      font-size: 20px;
+      font-weight: 200;
+
+      border-radius: 4px;
+      box-shadow: 0 4px 4px 0 #00000055;
+
+      transition: 150ms ease-out;
+      &:hover {
+        background-color: #444444;
+      }
+    }
+  }
   .header-wrapper {
     width: 100%;
     background-color: #2d2d2d;
@@ -71,7 +103,7 @@
       width: 100%;
 
       box-sizing: border-box;
-      
+
       .player-profile {
         display: flex;
 
@@ -90,18 +122,25 @@
           fill: #444444;
         }
       }
+
       .player-data-wrapper {
         display: flex;
 
         flex-direction: column;
 
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
 
         gap: 10px;
 
         margin: 0;
         padding: 0;
+
+        .pieces-wrapper {
+          display: flex;
+          flex-direction: row;
+          height: 40px;
+        }
 
         .name-wrapper {
           display: flex;

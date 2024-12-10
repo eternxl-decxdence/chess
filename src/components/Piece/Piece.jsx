@@ -7,7 +7,7 @@ import { returnPieceIconName } from "../../utils/js/utils";
 import "./Piece.scss";
 import Spritesheet from "../../assets/symbol-defs.svg";
 
-export default function Piece({ pieceData, draggable }) {
+export default function Piece({ pieceData, draggable, onBoard }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: pieceData.square,
@@ -24,7 +24,7 @@ export default function Piece({ pieceData, draggable }) {
       style={styleTransform}
       {...listeners}
       {...attributes}
-      className={`piece-icon-box ${isDragging ? "active" : ""}`}
+      className={`piece-icon-box ${isDragging ? "active" : ""} draggable`}
     >
       <svg className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}>
         <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
@@ -35,7 +35,7 @@ export default function Piece({ pieceData, draggable }) {
   const nonDraggablePiece = (
     <span
       onTransitionEnd={(e) => e.stopPropagation()}
-      className={`piece-icon-box non-draggable`}
+      className={`piece-icon-box ${onBoard ? "" : "non-draggable"}`}
     >
       <svg className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}>
         <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />

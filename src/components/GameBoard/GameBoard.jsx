@@ -1,4 +1,3 @@
-import { Chess } from "chess.js";
 import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import { defaultSquareNotation } from "../../utils/js/utils";
@@ -8,9 +7,13 @@ import "./Coordinates.scss";
 import Square from "../Square/Square";
 import PromotionDialog from "../PromotionDialog/PromotionDialog";
 
-
-
-export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
+export default function GameBoard({
+  chess,
+  onGameOver,
+  onPieceCapture,
+  onFirstMove,
+  onSideChange
+}) {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
   const [lastMoves, setLastMoves] = useState([]);
@@ -47,6 +50,9 @@ export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
   }
 
   function onMove(to, position) {
+    if (chess.history.length == 0) {
+      onFirstMove();
+    }
     if (
       activeSquare.type == PAWN &&
       ((activeSquare.color == WHITE && position.row == 0) ||
@@ -55,6 +61,7 @@ export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
       onPromotion(to, position);
     } else {
       chess.move({ from: activeSquare.square, to: to });
+      onSideChange(chess.turn());
       checkCapture();
       checkGameOver();
       setLastMoves([activeSquare.square, to]);
@@ -69,6 +76,7 @@ export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
 
   function promoteMove(to, pieceType) {
     chess.move({ from: activeSquare.square, to: to, promotion: pieceType });
+    onSideChange(chess.turn());
     checkCapture();
     checkGameOver();
     setLastMoves([activeSquare.square, to]);
@@ -83,37 +91,28 @@ export default function GameBoard({ chess, onGameOver, onPieceCapture}) {
       dialogPosition: { col: null, row: null }
     });
   }
-  
-  function checkGameOver(){
 
+  function checkGameOver() {
     if (chess.isCheckmate()) {
       onGameOver("Checkmate");
-    }
-    else if (chess.isStalemate()) {
+    } else if (chess.isStalemate()) {
       onGameOver("Stalemate");
-
-    }
-    else if (chess.isInsufficientMaterial()) {
+    } else if (chess.isInsufficientMaterial()) {
       onGameOver("Insufficient Material");
-
-    }
-    else if (chess.isThreefoldRepetition()) {
+    } else if (chess.isThreefoldRepetition()) {
       onGameOver("Threefold Repetition");
-   
+    } else if (chess.isDraw()) {
+      onGameOver("Draw");
+    } else {
     }
-    else if (chess.isDraw()) {
-      onGameOver("Draw")
-
-    }
-    else {}
   }
-  function checkCapture(){
-    let moves = chess.history({verbose:true});
-    let lastMove = moves[moves.length-1];
+  function checkCapture() {
+    let moves = chess.history({ verbose: true });
+    let lastMove = moves[moves.length - 1];
     if (lastMove.captured) {
-      console.log('captured')
+      console.log("captured");
       console.log(chess);
-      onPieceCapture(lastMove.captured, (chess.turn() == WHITE ? BLACK : WHITE));
+      onPieceCapture(lastMove.captured, chess.turn() == WHITE ? BLACK : WHITE);
       console.log(chess);
     }
   }

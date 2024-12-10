@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"GamePage.css"}
+{"version":3,"sources":["../src/pages/GamePage/GamePage.scss"],"names":[],"mappings":"AAAA,WACE,UAAA,CACA,YAAA,CACA,eAAA,CACA,YAAA,CACA,kBAAA,CACA,sBAAA,CAGF,oBACE,wBAAA,CACA,YAAA,CAEA,YAAA,CACA,sBAAA,CAAA,iBAAA,CACA,uBAAA,CAAA,kBAAA,CAEA,qBAAA,CACA,sBAAA,CACA,kBAAA,CACA,QAAA,CAEA,iBAAA,CAEA,8CAAA,CAEF,gBACE,YAAA,CACA,kBAAA,CACA,6BAAA,CAEA,SAAA,CACA,QAAA,CACA,UAAA","file":"GamePage.css"}

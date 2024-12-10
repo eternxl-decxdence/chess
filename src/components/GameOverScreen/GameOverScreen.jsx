@@ -1,21 +1,9 @@
 import { BLACK, WHITE } from "chess.js";
 import Spirtesheet from "../../assets/symbol-defs.svg";
-import { returnPieceIconName } from "../../utils/js/utils";
+import SmallPiece from "./SmallPiece";
 import "./GameOverScreen.scss";
 
-export default function GameOverScreen({reason, capturedPieces}) {
-  function SmallPiece({ piece }) {
-    return (
-      <span
-        className={`taken-piece ${piece.color == WHITE ? "white" : "black"}`}
-      >
-        <svg className='piece-image'>
-          <use href={`${Spirtesheet}#${returnPieceIconName(piece)}`} />
-        </svg>
-      </span>
-    );
-  }
-
+export default function GameOverScreen({ reason, capturedPieces, onRestart }) {
   return (
     <div className='game-over-dialog-overlay'>
       <dialog open className='game-over-dialog'>
@@ -35,10 +23,17 @@ export default function GameOverScreen({reason, capturedPieces}) {
                 <hr />
                 <span className='name-text'>White</span>
               </div>
-              <div className='figure-wrapper'>{capturedPieces.white.map((piece) => <SmallPiece piece={{type: piece, color: WHITE}}/>)}</div>
+              <div className='pieces-wrapper'>
+                {capturedPieces.white.map((piece, index) => (
+                  <SmallPiece
+                    key={index}
+                    piece={{ type: piece, color: BLACK }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <hr className="card-separator"/>
+          <hr className='card-separator' />
           <div className='player-card'>
             <div className='player-profile'>
               <svg className='placeholder-logo'>
@@ -51,11 +46,22 @@ export default function GameOverScreen({reason, capturedPieces}) {
                 <hr />
                 <span className='name-text'>Black</span>
               </div>
-              <div className='figure-wrapper'>{capturedPieces.black.map((piece) => <SmallPiece piece={{type: piece, color: BLACK}}/>)}</div>
+              <div className='pieces-wrapper'>
+                {capturedPieces.black.map((piece, index) => (
+                  <SmallPiece
+                    key={index}
+                    piece={{ type: piece, color: WHITE }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        <div className='buttons-wrapper'></div>
+        <div className='buttons-wrapper'>
+          <button className='restart-button' onClick={onRestart}>
+            Restart
+          </button>
+        </div>
       </dialog>
     </div>
   );

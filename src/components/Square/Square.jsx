@@ -31,7 +31,13 @@ export default function Square({
           : ""
       }${isLastMove ? " last-move" : ""}`}
     >
-      {squareData.type && <Piece draggable={true} pieceData={squareData} />}
+      {squareData.type && (
+        <Piece
+          draggable={squareData.color === chess.turn()}
+          pieceData={squareData}
+          onBoard={true}
+        />
+      )}
       {isPossibleMove && (
         <div
           onClick={handlePossibleMoveClick}

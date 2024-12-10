@@ -11,7 +11,6 @@ export default function Header() {
         <span className='navlabel'>Chess</span>
         <button className='navlabel-active'>New Game</button>
         <button className='navlabel-active'>Load</button>
-        <button className='navlabel-active'>Board Editor</button>
       </div>
     </div>
   );
