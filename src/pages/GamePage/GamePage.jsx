@@ -3,7 +3,7 @@ import GameBoard from "../../components/GameBoard/GameBoard";
 import GameOverScreen from "../../components/GameOverScreen/GameOverScreen";
 import Timer from "../../components/Timer/Timer";
 import BoardControls from "../../components/BoardControls/BoardControls";
-import { WHITE, PAWN, ROOK, QUEEN, KNIGHT, BISHOP, BLACK } from "chess.js";
+import { WHITE, BLACK } from "chess.js";
 import "./GamePage.scss";
 import { useState } from "react";
 import PlayerWidget from "../../components/PlayerWidget/PlayerWidget";
@@ -17,7 +17,6 @@ export default function GamePage({ chess, onReset }) {
   const [isGameStarted, setGameStarted] = useState(false);
   const [activeSide, setActiveSide] = useState(WHITE);
 
-  console.log(chess);
   function handleTimeout() {
     setGameOver({ gameOver: true, reason: "Timeout" });
   }
@@ -37,13 +36,11 @@ export default function GamePage({ chess, onReset }) {
     } else {
       pieces.black.push(piece);
     }
-    console.log(chess);
     setCapturedPieces(pieces);
-    console.log(capturedPieces);
   }
 
   function handleGameOver(reason) {
-    console.log(reason);
+
     setGameOver({ gameOver: true, reason: reason });
   }
   return (

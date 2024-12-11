@@ -27,7 +27,7 @@ export default function GameOverScreen({ reason, capturedPieces, onRestart }) {
                 {capturedPieces.white.map((piece, index) => (
                   <SmallPiece
                     key={index}
-                    piece={{ type: piece, color: BLACK }}
+                    piece={{ type: piece, color: WHITE}}
                   />
                 ))}
               </div>
@@ -50,7 +50,7 @@ export default function GameOverScreen({ reason, capturedPieces, onRestart }) {
                 {capturedPieces.black.map((piece, index) => (
                   <SmallPiece
                     key={index}
-                    piece={{ type: piece, color: WHITE }}
+                    piece={{ type: piece, color: BLACK }}
                   />
                 ))}
               </div>

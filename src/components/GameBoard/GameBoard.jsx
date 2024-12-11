@@ -94,15 +94,15 @@ export default function GameBoard({
 
   function checkGameOver() {
     if (chess.isCheckmate()) {
-      onGameOver("Checkmate");
+      setTimeout(() => onGameOver("Checkmate"), 1000);
     } else if (chess.isStalemate()) {
-      onGameOver("Stalemate");
+      setTimeout(() => onGameOver("Stalemate"), 1000);
     } else if (chess.isInsufficientMaterial()) {
-      onGameOver("Insufficient Material");
+      setTimeout(() => onGameOver("Insufficient Material"), 1000);
     } else if (chess.isThreefoldRepetition()) {
-      onGameOver("Threefold Repetition");
+      setTimeout(() =>  onGameOver("Threefold Repetition"), 1000);
     } else if (chess.isDraw()) {
-      onGameOver("Draw");
+      setTimeout(() => onGameOver("Draw"), 1000);
     } else {
     }
   }
@@ -110,10 +110,9 @@ export default function GameBoard({
     let moves = chess.history({ verbose: true });
     let lastMove = moves[moves.length - 1];
     if (lastMove.captured) {
-      console.log("captured");
-      console.log(chess);
+      
       onPieceCapture(lastMove.captured, chess.turn() == WHITE ? BLACK : WHITE);
-      console.log(chess);
+
     }
   }
   return (
