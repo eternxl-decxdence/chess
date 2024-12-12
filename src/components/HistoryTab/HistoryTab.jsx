@@ -1,11 +1,12 @@
 import "./HistoryTab.scss";
+import { useState } from "react";
 
-
-export default function HistoryTab({chess}) {
-    const [moves, setMoves] = useState(chess.moves());
-    
-    
-    return <div className="history-tab">
-        
+export default function HistoryTab({ history }) {
+  return (
+    <div className='history-tab'>
+      <span className='title'>Moves</span>
+      <hr className='separator' />
+      <div className='moves'>{}</div>
     </div>
+  );
 }

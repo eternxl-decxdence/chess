@@ -2,7 +2,9 @@ import Header from "../../components/Header/Header";
 import GameBoard from "../../components/GameBoard/GameBoard";
 import GameOverScreen from "../../components/GameOverScreen/GameOverScreen";
 import Timer from "../../components/Timer/Timer";
+import HistoryTab from "../../components/HistoryTab/HistoryTab";
 import BoardControls from "../../components/BoardControls/BoardControls";
+
 import { WHITE, BLACK } from "chess.js";
 import "./GamePage.scss";
 import { useState } from "react";
@@ -16,6 +18,7 @@ export default function GamePage({ chess, onReset }) {
   const [isGameOver, setGameOver] = useState({ gameOver: false, reason: null });
   const [isGameStarted, setGameStarted] = useState(false);
   const [activeSide, setActiveSide] = useState(WHITE);
+  const [history, setHistory] = useState([{}]);
 
   function handleTimeout() {
     setGameOver({ gameOver: true, reason: "Timeout" });
@@ -40,7 +43,6 @@ export default function GamePage({ chess, onReset }) {
   }
 
   function handleGameOver(reason) {
-
     setGameOver({ gameOver: true, reason: reason });
   }
   return (
@@ -65,6 +67,7 @@ export default function GamePage({ chess, onReset }) {
           onPieceCapture={handlePieceCapture}
           onFirstMove={handleGameStart}
           onSideChange={handleSideChange}
+          onHistoryUpdate={setHistory}
         />
         <div className='timers-wrapper'>
           <Timer
@@ -79,6 +82,7 @@ export default function GamePage({ chess, onReset }) {
           />
         </div>
       </div>
+      <HistoryTab history={history} />
       {isGameOver.gameOver ? (
         <GameOverScreen
           reason={isGameOver.reason}

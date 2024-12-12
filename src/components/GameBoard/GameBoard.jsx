@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
 import { defaultSquareNotation } from "../../utils/js/utils";
 import { PAWN, WHITE, BLACK } from "chess.js";
+
 import "./GameBoard.scss";
 import "./Coordinates.scss";
 import Square from "../Square/Square";
@@ -12,7 +13,8 @@ export default function GameBoard({
   onGameOver,
   onPieceCapture,
   onFirstMove,
-  onSideChange
+  onSideChange,
+  onHistoryUpdate
 }) {
   const [chessboard, setChessboard] = useState(chess.board());
   const [activeSquare, setActiveSquare] = useState(null);
@@ -28,6 +30,14 @@ export default function GameBoard({
     if (active.data.current.color === chess.turn()) {
       onSquareSelection(active.data.current);
     }
+  }
+
+  function updateHistory() {
+    let updatedHistory = [];
+    let historyElement = { white: null, black: null };
+
+    chess.history().forEach((element, index) => {});
+    onHistoryUpdate(updateHistory);
   }
 
   function handleDragEnd(event) {
@@ -50,6 +60,7 @@ export default function GameBoard({
   }
 
   function onMove(to, position) {
+    console.log(chess.history());
     if (chess.history.length == 0) {
       onFirstMove();
     }
@@ -100,7 +111,7 @@ export default function GameBoard({
     } else if (chess.isInsufficientMaterial()) {
       setTimeout(() => onGameOver("Insufficient Material"), 1000);
     } else if (chess.isThreefoldRepetition()) {
-      setTimeout(() =>  onGameOver("Threefold Repetition"), 1000);
+      setTimeout(() => onGameOver("Threefold Repetition"), 1000);
     } else if (chess.isDraw()) {
       setTimeout(() => onGameOver("Draw"), 1000);
     } else {
@@ -110,9 +121,7 @@ export default function GameBoard({
     let moves = chess.history({ verbose: true });
     let lastMove = moves[moves.length - 1];
     if (lastMove.captured) {
-      
       onPieceCapture(lastMove.captured, chess.turn() == WHITE ? BLACK : WHITE);
-
     }
   }
   return (
