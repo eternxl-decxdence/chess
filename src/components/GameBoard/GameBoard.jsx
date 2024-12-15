@@ -33,11 +33,12 @@ export default function GameBoard({
   }
 
   function updateHistory() {
-    let updatedHistory = [];
-    let historyElement = { white: null, black: null };
-
-    chess.history().forEach((element, index) => {});
-    onHistoryUpdate(updateHistory);
+    let result = [];
+    const history = chess.history();
+    for (let i = 0; i < history.length; i += 2) {
+      result.push({ white: history[i], black: history[i + 1] });
+    }
+    onHistoryUpdate(result);
   }
 
   function handleDragEnd(event) {
@@ -60,7 +61,6 @@ export default function GameBoard({
   }
 
   function onMove(to, position) {
-    console.log(chess.history());
     if (chess.history.length == 0) {
       onFirstMove();
     }
@@ -72,6 +72,7 @@ export default function GameBoard({
       onPromotion(to, position);
     } else {
       chess.move({ from: activeSquare.square, to: to });
+      updateHistory();
       onSideChange(chess.turn());
       checkCapture();
       checkGameOver();
@@ -87,6 +88,7 @@ export default function GameBoard({
 
   function promoteMove(to, pieceType) {
     chess.move({ from: activeSquare.square, to: to, promotion: pieceType });
+    updateHistory();
     onSideChange(chess.turn());
     checkCapture();
     checkGameOver();

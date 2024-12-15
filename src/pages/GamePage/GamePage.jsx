@@ -18,7 +18,7 @@ export default function GamePage({ chess, onReset }) {
   const [isGameOver, setGameOver] = useState({ gameOver: false, reason: null });
   const [isGameStarted, setGameStarted] = useState(false);
   const [activeSide, setActiveSide] = useState(WHITE);
-  const [history, setHistory] = useState([{}]);
+  const [history, setHistory] = useState([]);
 
   function handleTimeout() {
     setGameOver({ gameOver: true, reason: "Timeout" });
@@ -41,7 +41,13 @@ export default function GamePage({ chess, onReset }) {
     }
     setCapturedPieces(pieces);
   }
-
+  function handleHistoryUpdate(result) {
+    setHistory((prevState) => {
+      let update = [...result];
+      update.map((element) => ({ ...element }));
+      return update;
+    });
+  }
   function handleGameOver(reason) {
     setGameOver({ gameOver: true, reason: reason });
   }
@@ -67,7 +73,7 @@ export default function GamePage({ chess, onReset }) {
           onPieceCapture={handlePieceCapture}
           onFirstMove={handleGameStart}
           onSideChange={handleSideChange}
-          onHistoryUpdate={setHistory}
+          onHistoryUpdate={handleHistoryUpdate}
         />
         <div className='timers-wrapper'>
           <Timer

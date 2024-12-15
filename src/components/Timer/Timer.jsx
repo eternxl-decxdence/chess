@@ -2,12 +2,12 @@ import "./Timer.scss";
 import { useEffect, useState } from "react";
 import Spritesheet from "../../assets/symbol-defs.svg";
 
-export default function Timer({ color, onTimeout, isActive}) {
-  const [time, setTime] = useState({ minutes: 5, seconds: 0 });
+export default function Timer({ color, onTimeout, isActive }) {
+  const [time, setTime] = useState({ minutes: 60, seconds: 0 });
   const [isTimerRunningOut, setTimerRunningOut] = useState(false);
   useEffect(() => {
     if (isActive && time.minutes >= 0) {
-      if (time.minutes <= 0){
+      if (time.minutes <= 0) {
         setTimerRunningOut(true);
       }
       setTimeout(() => {
@@ -19,14 +19,15 @@ export default function Timer({ color, onTimeout, isActive}) {
         } else if (time.seconds != 0) {
           setTime({ minutes: time.minutes, seconds: time.seconds - 1 });
         }
-        
       }, 1000);
     }
   }, [time, isActive]);
 
   return (
     <div
-      className={`timer-box ${color}${isActive == false ? " inactive" : ""}${isTimerRunningOut && isActive ? " warning" : ""}`}
+      className={`timer-box ${color}${isActive == false ? " inactive" : ""}${
+        isTimerRunningOut && isActive ? " warning" : ""
+      }`}
     >
       <svg className='timer-icon'>
         <use href={`${Spritesheet}#icon-clock`}></use>
