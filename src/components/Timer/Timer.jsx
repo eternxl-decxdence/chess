@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Spritesheet from "../../assets/symbol-defs.svg";
 
 export default function Timer({ color, onTimeout, isActive }) {
-  const [time, setTime] = useState({ minutes: 60, seconds: 0 });
+  const [time, setTime] = useState({ minutes: 10, seconds: 0 });
   const [isTimerRunningOut, setTimerRunningOut] = useState(false);
   useEffect(() => {
     if (isActive && time.minutes >= 0) {

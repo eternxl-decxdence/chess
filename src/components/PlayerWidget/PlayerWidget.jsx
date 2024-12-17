@@ -1,9 +1,19 @@
 import "./PlayerWidget.scss";
 import Spirtesheet from "../../assets/symbol-defs.svg";
 import SmallPiece from "../SmallPiece/SmallPiece";
-import { WHITE } from "chess.js";
+import { BISHOP, ROOK, BLACK, KNIGHT, PAWN, QUEEN, WHITE } from "chess.js";
 
 export default function PlayerWidget({ color, pieces, playerName }) {
+  const pattern = [QUEEN, BISHOP, ROOK, KNIGHT, QUEEN, PAWN];
+  function sortArray(array, pattern) {
+    return array.sort(function (a, b) {
+      if (pattern.indexOf(a) === pattern.indexOf(b)) {
+        return 0;
+      } else {
+        return pattern.indexOf(a) > pattern.indexOf(b) ? 1 : -1;
+      }
+    });
+  }
   return (
     <div className='player-widget'>
       <div className='player-profile'>
@@ -21,8 +31,11 @@ export default function PlayerWidget({ color, pieces, playerName }) {
         </div>
         <hr className='separator' />
         <div className='pieces-wrapper'>
-          {pieces.map((piece, index) => (
-            <SmallPiece key={index} piece={{ type: piece, color: color }} />
+          {sortArray(pieces, pattern).map((piece, index) => (
+            <SmallPiece
+              key={index}
+              piece={{ type: piece, color: color == WHITE ? BLACK : WHITE }}
+            />
           ))}
         </div>
       </div>

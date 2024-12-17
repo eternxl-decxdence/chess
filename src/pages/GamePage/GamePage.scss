@@ -1,11 +1,13 @@
 .game-page {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  padding: 0;
+
+  gap: 0;
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 57px;
+  justify-content: space-around;
 }
 
 .game-board-wrapper {
@@ -38,9 +40,17 @@
 }
 
 .player-widgets-wrapper {
+  position: relative;
+  left: 0;
   height: 724px;
   display: flex;
   flex-direction: column;
   align-self: center;
   justify-content: space-between;
+}
+
+@media (width <= 1800px) {
+  .player-widgets-wrapper {
+    height: 560px;
+  }
 }

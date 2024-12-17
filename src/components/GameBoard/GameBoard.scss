@@ -39,3 +39,17 @@
     background-color: #d6d6d6;
   }
 }
+
+@media (width <= 1800px) {
+  .board {
+    width: calc(8 * 60px);
+    height: calc(8 * 60px);
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+
+    .square {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}

@@ -50,3 +50,27 @@
 .last-move {
   box-shadow: inset 0px 0px 10px 7px #fffd9985;
 }
+@media (width <= 1800px) {
+  .possible-move {
+    min-width: 32px;
+    min-height: 32px;
+
+    &:hover {
+      min-width: 40px;
+      min-height: 40px;
+    }
+    &-attack {
+      min-width: 60px;
+      min-height: 60px;
+
+      border: 6px solid #000;
+      &:hover {
+        border: 30px solid #000;
+      }
+    }
+  }
+  .square-checked {
+    width: 60px;
+    height: 60px;
+  }
+}

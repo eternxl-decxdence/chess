@@ -56,3 +56,22 @@
     width: 90px;
   }
 }
+
+@media (width <= 1800px) {
+  .piece-icon-box {
+    width: 60px;
+    height: 60px;
+  }
+  .piece {
+    width: 60px;
+    height: 60px;
+  }
+  .active {
+    width: 72px;
+    height: 72px;
+    .piece {
+      width: 72px;
+      height: 72px;
+    }
+  }
+}

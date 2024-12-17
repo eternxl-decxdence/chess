@@ -1,5 +1,5 @@
 .player-widget {
-  width: 560px;
+  width: 400px;
 
   display: flex;
   flex-direction: row;
@@ -80,5 +80,11 @@
         border: 0.5px solid #d9d9d9;
       }
     }
+  }
+}
+
+@media (width <= 1800px) {
+  .player-widget {
+    width: 320px;
   }
 }

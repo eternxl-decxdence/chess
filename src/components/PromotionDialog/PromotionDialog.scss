@@ -66,3 +66,16 @@
     top: 320px;
   }
 }
+
+@media (width <= 1800px) {
+  .promotion-dialog-overlay {
+    width: 480px;
+    height: 480px;
+    .promotion-dialog {
+      width: 60px;
+      height: 240px;
+      top: calc(var(--row) * 60px);
+      left: calc(var(--col) * 60px);
+    }
+  }
+}

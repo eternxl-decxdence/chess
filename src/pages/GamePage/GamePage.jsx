@@ -88,7 +88,9 @@ export default function GamePage({ chess, onReset }) {
           />
         </div>
       </div>
-      <HistoryTab history={history} />
+      <div className='history-tab-wrapper'>
+        <HistoryTab history={history} />
+      </div>
       {isGameOver.gameOver ? (
         <GameOverScreen
           reason={isGameOver.reason}
