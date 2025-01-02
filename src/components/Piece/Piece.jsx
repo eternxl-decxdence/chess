@@ -18,20 +18,6 @@ export default function Piece({ pieceData, draggable, onBoard }) {
     transform: CSS.Translate.toString(transform)
   };
 
-  const draggablePiece = (
-    <span
-      ref={setNodeRef}
-      style={styleTransform}
-      {...listeners}
-      {...attributes}
-      className={`piece-icon-box ${isDragging ? "active" : ""} draggable`}
-    >
-      <svg className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}>
-        <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
-      </svg>
-    </span>
-  );
-
   const nonDraggablePiece = (
     <span
       onTransitionEnd={(e) => e.stopPropagation()}
@@ -43,5 +29,34 @@ export default function Piece({ pieceData, draggable, onBoard }) {
     </span>
   );
 
-  return draggable ? draggablePiece : nonDraggablePiece;
+  if (draggable) {
+    return (
+      <span
+        ref={setNodeRef}
+        style={styleTransform}
+        {...listeners}
+        {...attributes}
+        className={`piece-icon-box ${isDragging ? "active" : ""} draggable`}
+      >
+        <svg
+          className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}
+        >
+          <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
+        </svg>
+      </span>
+    );
+  } else {
+    return (
+      <span
+        onTransitionEnd={(e) => e.stopPropagation()}
+        className={`piece-icon-box ${onBoard ? "" : "non-draggable"}`}
+      >
+        <svg
+          className={`piece${pieceData.color == WHITE ? "-white" : "-black"}`}
+        >
+          <use href={`${Spritesheet}#${returnPieceIconName(pieceData)}`} />
+        </svg>
+      </span>
+    );
+  }
 }

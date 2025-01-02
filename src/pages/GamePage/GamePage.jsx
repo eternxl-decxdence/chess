@@ -19,6 +19,7 @@ export default function GamePage({ chess, onReset }) {
   const [isGameStarted, setGameStarted] = useState(false);
   const [activeSide, setActiveSide] = useState(WHITE);
   const [history, setHistory] = useState([]);
+  const [isOpenHistory, setOpenHistory] = useState(false);
 
   function handleTimeout() {
     setGameOver({ gameOver: true, reason: "Timeout" });
@@ -48,56 +49,117 @@ export default function GamePage({ chess, onReset }) {
       return update;
     });
   }
+
   function handleGameOver(reason) {
     setGameOver({ gameOver: true, reason: reason });
   }
-  return (
-    <div className='game-page'>
-      <Header />
-      <div className='player-widgets-wrapper'>
+
+  function handleOpenHistory() {
+    setOpenHistory(true);
+  }
+
+  function handleCloseHistory() {
+    setOpenHistory(false);
+  }
+  if (window.innerWidth >= 600) {
+    return (
+      <div className='game-page'>
+        <Header />
+        <div className='player-widgets-wrapper'>
+          <PlayerWidget
+            playerName={"Player 1"}
+            color={WHITE}
+            pieces={capturedPieces.white}
+          />
+          <PlayerWidget
+            playerName={"Player 2"}
+            color={BLACK}
+            pieces={capturedPieces.black}
+          />
+        </div>
+        <div className='game-board-wrapper'>
+          <GameBoard
+            chess={chess}
+            onGameOver={handleGameOver}
+            onPieceCapture={handlePieceCapture}
+            onFirstMove={handleGameStart}
+            onSideChange={handleSideChange}
+            onHistoryUpdate={handleHistoryUpdate}
+          />
+          <div className='timers-wrapper'>
+            <Timer
+              color='white'
+              onTimeout={handleTimeout}
+              isActive={isGameStarted && activeSide == WHITE}
+            />
+            <Timer
+              color='black'
+              onTimeout={handleTimeout}
+              isActive={isGameStarted && activeSide == BLACK}
+            />
+          </div>
+        </div>
+        <div className='history-tab-wrapper'>
+          <HistoryTab history={history} />
+        </div>
+        {isGameOver.gameOver ? (
+          <GameOverScreen
+            reason={isGameOver.reason}
+            capturedPieces={capturedPieces}
+            onRestart={handleRestart}
+          />
+        ) : null}
+      </div>
+    );
+  }
+  //mobile layout
+  else {
+    return (
+      <div className='game-page'>
+        <Header mobile openHistory={handleOpenHistory} />
         <PlayerWidget
+          mobile
           playerName={"Player 1"}
           color={WHITE}
           pieces={capturedPieces.white}
+          onTimeout={handleTimeout}
+          isGameStarted={isGameStarted}
+          activeSide={activeSide}
         />
+        <div className='game-board-wrapper'>
+          <GameBoard
+            chess={chess}
+            onGameOver={handleGameOver}
+            onPieceCapture={handlePieceCapture}
+            onFirstMove={handleGameStart}
+            onSideChange={handleSideChange}
+            onHistoryUpdate={handleHistoryUpdate}
+          />
+        </div>
         <PlayerWidget
+          mobile
           playerName={"Player 2"}
           color={BLACK}
           pieces={capturedPieces.black}
+          onTimeout={handleTimeout}
+          isGameStarted={isGameStarted}
+          activeSide={activeSide}
         />
-      </div>
-      <div className='game-board-wrapper'>
-        <GameBoard
-          chess={chess}
-          onGameOver={handleGameOver}
-          onPieceCapture={handlePieceCapture}
-          onFirstMove={handleGameStart}
-          onSideChange={handleSideChange}
-          onHistoryUpdate={handleHistoryUpdate}
-        />
-        <div className='timers-wrapper'>
-          <Timer
-            color='white'
-            onTimeout={handleTimeout}
-            isActive={isGameStarted && activeSide == WHITE}
+        {isOpenHistory ? (
+          <HistoryTab
+            mobile
+            history={history}
+            closeHistory={handleCloseHistory}
           />
-          <Timer
-            color='black'
-            onTimeout={handleTimeout}
-            isActive={isGameStarted && activeSide == BLACK}
+        ) : null}
+        {isGameOver.gameOver ? (
+          <GameOverScreen
+            reason={isGameOver.reason}
+            capturedPieces={capturedPieces}
+            onRestart={handleRestart}
           />
-        </div>
+        ) : null}
       </div>
-      <div className='history-tab-wrapper'>
-        <HistoryTab history={history} />
-      </div>
-      {isGameOver.gameOver ? (
-        <GameOverScreen
-          reason={isGameOver.reason}
-          capturedPieces={capturedPieces}
-          onRestart={handleRestart}
-        />
-      ) : null}
-    </div>
-  );
+    );
+  }
 }

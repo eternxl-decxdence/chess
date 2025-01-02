@@ -67,7 +67,7 @@
   }
 }
 
-@media (width <= 1800px) {
+@media (width <= 1560px) {
   .promotion-dialog-overlay {
     width: 480px;
     height: 480px;
@@ -76,6 +76,18 @@
       height: 240px;
       top: calc(var(--row) * 60px);
       left: calc(var(--col) * 60px);
+    }
+  }
+}
+@media (width <= 1560px) {
+  .promotion-dialog-overlay {
+    width: 400px;
+    height: 400px;
+    .promotion-dialog {
+      width: 50px;
+      height: 200px;
+      top: calc(var(--row) * 50px);
+      left: calc(var(--col) * 50px);
     }
   }
 }

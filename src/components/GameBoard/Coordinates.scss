@@ -6,6 +6,10 @@
   line-height: 12px;
 
   color: $color;
+  @media (width <= 600px) {
+    font-size: 12px;
+    line-height: 8px;
+  }
 }
 
 @mixin row-coordinate($color) {
@@ -13,12 +17,20 @@
 
   top: 8px;
   left: 8px;
+  @media (width <= 600px) {
+    top: 4px;
+    left: 4px;
+  }
 }
 @mixin col-coordinate($color) {
   @include coordinate($color);
 
   bottom: 8px;
   right: 8px;
+  @media (width <= 600px) {
+    bottom: 4px;
+    right: 4px;
+  }
 }
 // column coordinate
 

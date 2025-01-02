@@ -49,8 +49,20 @@
   justify-content: space-between;
 }
 
-@media (width <= 1800px) {
+@media (width <= 1560px) {
   .player-widgets-wrapper {
     height: 560px;
+  }
+}
+@media (width <= 600px) {
+  .game-page {
+    justify-content: flex-start;
+    flex-direction: column;
+
+    gap: 20px;
+
+    .game-board-wrapper {
+      width: 100vw;
+    }
   }
 }
